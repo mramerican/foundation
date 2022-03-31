@@ -1,0 +1,160 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: theme-sp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-18 08:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Loco-Version: 2.3.1; wp-5.3\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:30
+msgid "На головну"
+msgstr ""
+
+#: footer.php:238
+msgid "Обов'язкове поле"
+msgstr ""
+
+#: footer.php:239
+msgid "Не коректний формат"
+msgstr ""
+
+#: front-page.php:58 front-page.php:113 front-page.php:172 single-event.php:178
+#: single-program.php:209 template/cat-events.php:101
+#: template/cat-programs.php:67
+msgid "Детальніше"
+msgstr ""
+
+#: front-page.php:252
+msgid "Дивитися відео"
+msgstr ""
+
+#: front-page.php:378
+msgid "Всі програми"
+msgstr ""
+
+#: inc/cat.php:222 search.php:39 single-new.php:11 single-new.php:116
+#: template/blog.php:13 template/cat-news.php:151 template/single-foot.php:22
+msgid "Новини"
+msgstr ""
+
+#: inc/extensions.php:31 inc/extensions.php:50
+msgid "Головна"
+msgstr ""
+
+#: inc/extensions.php:77
+msgid "Главная"
+msgstr ""
+
+#: page-about-us.php:185 page-about-us.php:228
+msgid "Подробнее"
+msgstr ""
+
+#: page-contacts.php:149
+msgid "Файл"
+msgstr ""
+
+#: page-contacts.php:155
+msgid "Выбрано файлів:"
+msgstr ""
+
+#: page-contacts.php:155
+msgid "Виберіть файл"
+msgstr ""
+
+#: search.php:21
+msgid "Результат пошуку"
+msgstr ""
+
+#: search.php:76
+msgid "за вашим запитом нічого не знайдено"
+msgstr ""
+
+#: single-event.php:100 single-event.php:107 single-event.php:110
+#: single-event.php:387 single-event.php:394 single-event.php:397
+#: single-event.php:482 single-event.php:489 single-event.php:492
+#: single-event.php:605
+msgid "Зареєструватися"
+msgstr ""
+
+#: single-event.php:112 single-event.php:399 single-event.php:494
+msgid "Поділитися"
+msgstr ""
+
+#: single-event.php:558 single-event.php:639
+msgid "Тех підтримка:"
+msgstr ""
+
+#: single-new.php:64
+msgid "Поделиться"
+msgstr ""
+
+#: single-new.php:109
+msgid "Цікаві статті"
+msgstr ""
+
+#: single-new.php:148
+msgid "Читайте також"
+msgstr ""
+
+#: single-program.php:193
+msgid "скроль далі"
+msgstr ""
+
+#: single-program.php:291 single-sub-program.php:168
+msgid "Цікаві статті, та новини"
+msgstr ""
+
+#: template/blog.php:40
+msgid "Більше новин"
+msgstr ""
+
+#: template/cat-events.php:43
+msgid "Найближчі"
+msgstr ""
+
+#: template/cat-events.php:59 template/cat-events.php:62
+msgid "Онлайн-вебінар"
+msgstr ""
+
+#: template/cat-events.php:105
+msgid "Початок"
+msgstr ""
+
+#: template/cat-events.php:119 template/cat-news.php:176
+msgid "Йде наповнення розділу..."
+msgstr ""
+
+#: template/cat-news.php:68
+msgid "Більше"
+msgstr ""
+
+#: template/cat-news.php:110
+msgid "Пошук новин"
+msgstr ""
+
+#: template/cat-news.php:183 template/cat-programs.php:122
+msgid "Показати більше"
+msgstr ""
+
+#: template/cat-programs.php:122
+msgid "Приховати"
+msgstr ""
+
+#: template/next-page.php:4 template/next-page.php:12
+msgid "Наступна програма"
+msgstr ""
+
+#: template/next-page.php:14
+msgid "Перейти до програми"
+msgstr ""

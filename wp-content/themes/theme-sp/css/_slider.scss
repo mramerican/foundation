@@ -1,0 +1,610 @@
+.swiper {
+  &-js {
+    position: relative;
+  }
+
+  &-container {
+    width: 100%;
+
+    * :focus {
+      outline: none;
+    }
+
+    * {
+      &::selection {
+        background-color: transparent;
+      }
+
+      &::-moz-selection {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.swiper-pagination-progressbar{
+  left: 0;
+  background: #E0E0E0;
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  height: 2px;
+
+  .swiper-pagination-progressbar-fill {
+    background: $hover;
+    border-radius: 0;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  &:focus {
+    outline: none;
+  }
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+  bottom: -20px;
+}
+
+.sProgram {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  &__container {
+    overflow: visible;
+  }
+
+  &__items {
+  }
+
+  &__item {
+    width: auto;
+    &Fon{
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: -170px;
+      right: -100px;
+      z-index: -2;
+    }
+    &_foto{
+      .sProgram__itemWr{
+        width: 825px;
+        height: 520px;
+
+        @include lg{
+          width: 650px;
+          height: 390px;
+        }
+
+        @include md{
+          width: 700px;
+          height: 440px;
+        }
+
+        @include sm{
+          width: 327px;
+          height: 240px
+        }
+        &:before{
+          display: none;
+        }
+      }
+    }
+
+    &Wr {
+      width: 487px;
+      height: 642px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      z-index: 1;
+      &_parallax{
+        overflow: hidden;
+      }
+
+      @include sm{
+        width: 327px;
+        height: 431px
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        @include tr;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+        opacity: 0.8;
+        z-index: -1;
+      }
+    }
+
+    &B {
+      padding: 32px;
+      color: #fff;
+
+      @include md{
+        padding: 20px;
+      }
+
+    }
+
+    &Title {
+      font-family: $font2;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 130%;
+      letter-spacing: -0.02em;
+
+      @include md{
+        font-size: 24px;
+      }
+    }
+
+    &Txt {
+      margin-top: 9.5px;
+      font-size: 14px;
+      line-height: 150%;
+      @include md{
+        margin-top: 12px;
+      }
+    }
+  }
+
+  &__wNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 48px 0;
+
+    @include md{
+      margin: 32px 0;
+    }
+  }
+
+  &__b-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 32px;
+  }
+
+  &__nav {
+    @include tr;
+    position: relative;
+    width: 28px;
+    height: 21px;
+    flex-shrink: 0;
+
+    path {
+      @include tr;
+    }
+
+    &.swiper-button-disabled {
+      path {
+        fill: $grey1;
+      }
+    }
+
+    &:not(.swiper-button-disabled) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    &_prev {
+      margin-right: 10px;
+    }
+
+    &_next {
+    }
+  }
+
+  .swiper-scrollbar {
+    left: 0;
+    background: #E0E0E0;
+    position: relative;
+    width: 100%;
+    border-radius: 0;
+    height: 2px;
+
+    &-drag {
+      background: $hover;
+      border-radius: 0;
+      width: 5px;
+    }
+  }
+
+}
+
+.sPartner {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  &__container {
+    overflow: visible;
+  }
+
+  &__items {
+    @include sm{
+      height: 600px;
+    }
+  }
+
+  &__item {
+    width: auto;
+    
+    @include sm{
+      height: calc((100% - 30px) / 3);
+    }
+
+    &Wr {
+      width: 222px;
+      @include sm{
+        width: auto;
+      }
+    }
+
+    &Pic {
+      height: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+
+      @include sm{
+        height: 126px;
+        margin-bottom: 8px;
+      }
+    }
+
+    &Img {
+      flex-shrink: 0;
+    }
+
+    &Txt {
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 140%;
+      text-align: center;
+      letter-spacing: -0.02em;
+      color: #4F4F4F;
+
+      @include sm{
+        font-size: 10px;
+        max-height: 56px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &__wNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 48px 0;
+
+    @include md{
+      margin: 32px 0;
+    }
+  }
+
+  &__b-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 32px;
+  }
+
+  &__nav {
+    @include tr;
+    position: relative;
+    width: 28px;
+    height: 21px;
+    flex-shrink: 0;
+
+    path {
+      @include tr;
+    }
+
+    &.swiper-button-disabled {
+      path {
+        fill: $grey1;
+      }
+    }
+
+    &:not(.swiper-button-disabled) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    &_prev {
+      margin-right: 10px;
+    }
+
+    &_next {
+    }
+  }
+
+  .swiper-scrollbar {
+    left: 0;
+    background: #E0E0E0;
+    position: relative;
+    width: 100%;
+    border-radius: 0;
+    height: 2px;
+
+    &-drag {
+      background: $hover;
+      border-radius: 0;
+      width: 5px;
+    }
+  }
+}
+
+.sImplement {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  &__top{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__container {
+    overflow: visible;
+  }
+
+  &__items {
+    counter-reset: navItem;
+  }
+
+  &__item {
+    width: 396px;
+    //min-height: 480px;
+    align-self: stretch;
+    padding: 40px 32px;
+    height: auto;
+    border: 1px solid #E0E0E0;
+    &.swiper-slide-active{
+    }
+    &:hover{
+      border-color: $hover;
+    }
+
+    @include lg{
+      min-height: auto;
+    }
+
+    @include sm{
+      padding: 20px 16px;
+      min-height: auto;
+      width: 100%;
+      &:not(:last-child){
+        margin-bottom: 16px;
+      }
+    }
+
+    &Wr {
+    }
+
+    &Title {
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      @include sm{
+        margin-bottom: 16px;
+      }
+      &:after {
+        counter-increment: navItem;
+        content: counter(navItem, decimal-leading-zero);
+        position: relative;
+        top: 0;
+        left: 0;
+        font-family: $font2;
+        font-weight: 800;
+        font-size: inherit;
+        line-height: inherit;
+        color: #CB0D58;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 0.7px #CB0D58;
+        margin-left: 20px;
+      }
+    }
+
+    &Desc {
+      font-size: 14px;
+      line-height: 170%;
+
+      @include sm{
+        line-height: 1.5;
+      }
+
+      p {
+        font: inherit;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &__b-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin: auto 0 48px;
+  }
+
+  &__nav {
+    @include tr;
+    position: relative;
+    width: 28px;
+    height: 21px;
+    flex-shrink: 0;
+
+    path {
+      @include tr;
+    }
+
+    &.swiper-button-disabled {
+      path {
+        fill: $grey1;
+      }
+    }
+
+    &:not(.swiper-button-disabled) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    &_prev {
+      margin-right: 10px;
+    }
+
+    &_next {
+    }
+  }
+}
+
+.sTheme {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  &__top{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__container {
+    overflow: visible;
+  }
+
+  &__items {
+    counter-reset: navItem;
+
+
+  }
+
+  &__item {
+    width: 396px;
+    min-height: 261px;
+    align-self: stretch;
+    padding: 40px;
+    height: auto;
+    border: 1px solid #E0E0E0;
+    margin-bottom: 1px;
+
+    @include lg{
+      min-height: auto;
+    }
+
+    @include sm{
+      padding: 20px 16px;
+      width: 100%;
+      min-height: auto;
+      &:not(:last-child){
+        margin-bottom: 16px;
+      }
+    }
+    &.swiper-slide-active{
+    }
+    &:hover{
+      border-color: $hover;
+    }
+
+    &Wr {
+    }
+
+    &Title {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      @include sm{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      &:before {
+        counter-increment: navItem;
+        content: counter(navItem, decimal-leading-zero);
+        position: relative;
+        font-family: $font2;
+        font-weight: 800;
+        font-size: inherit;
+        line-height: inherit;
+        color: #CB0D58;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 0.7px #CB0D58;
+        margin-bottom: 32px;
+        @include sm{
+          margin-bottom: 24px;
+        }
+      }
+    }
+  }
+
+  &__b-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin: auto 0 48px;
+  }
+
+  &__nav {
+    @include tr;
+    position: relative;
+    width: 28px;
+    height: 21px;
+    flex-shrink: 0;
+
+    path {
+      @include tr;
+    }
+
+    &.swiper-button-disabled {
+      path {
+        fill: $grey1;
+      }
+    }
+
+    &:not(.swiper-button-disabled) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    &_prev {
+      margin-right: 10px;
+    }
+
+    &_next {
+    }
+  }
+}

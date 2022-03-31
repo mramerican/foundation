@@ -1,0 +1,338 @@
+# Translation of WP-Syntex - Polylang Pro in Ukrainian
+# This file is distributed under the same license as the WP-Syntex - Polylang Pro package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-12-02 09:58:05+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: uk_UA\n"
+"Project-Id-Version: WP-Syntex - Polylang Pro\n"
+
+#: tests/phpunit/tests/pro/test-widgets-blocks-filter.php:35
+msgid "Block"
+msgstr "Блок"
+
+#. translators: %s is a suite of comma separate file formats, for example: PO,
+#. XLIFF
+#: modules/import-export/file-format-factory.php:112
+msgid "Error: Wrong file format. The supported file formats are: %s."
+msgstr "Помилка: Невірний формат файла. Файлові формати, що підтримуються: %s."
+
+#: modules/xliff/xliff-import.php:82
+msgid "An error occurred during the import, please make sure your file is correctly formatted."
+msgstr "Під час імпорту сталася помилка, будь ласка, переконайтеся в правильності форматування файла."
+
+#: modules/xliff/xliff-import.php:73
+msgid "Something went wrong during the file import."
+msgstr "Під час імпорту файла щось пішло не так."
+
+#: modules/xliff/xliff-import.php:61
+msgid "Your PHP installation appears to be missing the libxml extension which is required by the importer."
+msgstr "Схоже,  у вашій установці PHP  відсутнє потрібне імпортету розширення libxml."
+
+#: modules/translate-slugs/settings-translate-slugs.php:20
+msgid "The module is automatically deactivated when using plain permalinks."
+msgstr "Модуль автоматично деактивується при використанні звичайних постійних посилань."
+
+#: modules/share-slug/settings-share-slug.php:35
+msgid "The module is automatically deactivated when using plain permalinks or when the language is set from the content in the URL modifications."
+msgstr "Модуль автоматично деактивується при використанні звичайних постійних посилань або коли мова встановлюється із вмісту в модифікаціях URL."
+
+#: modules/export/view-tab-export-strings.php:61
+msgid "Export file format"
+msgstr "Формат файла експорту:"
+
+#: modules/locale-fallback/view-locale-fallback.php:13
+msgid "Locale fallback"
+msgstr "Запасний варіант локалі"
+
+#: modules/locale-fallback/view-locale-fallback.php:15
+msgid "WordPress locale to use if a translation file is not available in the main locale."
+msgstr "Локаль WordPress для використання, якщо файл недоступний головною локаллю."
+
+#: modules/import/import-action.php:218
+msgid "The translation of the following string was not imported for security reasons:"
+msgid_plural "The translation of the following strings were not imported for security reasons:"
+msgstr[0] "Переклад такого рядка не імпортовано з причин безпеки:"
+msgstr[1] "Переклад таких рядків не імпортовано з причин безпеки:"
+msgstr[2] "Переклад таких рядків не імпортовано з причин безпеки:"
+
+#: modules/import-export/import-export.php:158
+msgid "Error: you haven't selected any target language to be exported."
+msgstr "Помилка: ви не обрали жодної цільової мови для експорту."
+
+#: modules/import-export/import-export.php:119
+#: modules/import-export/import-export.php:149
+msgid "Sorry, you are not allowed to manage options for this site."
+msgstr "На жаль, вам не дозволено керувати параметрами цього сайту."
+
+#: modules/import-export/import-export.php:80
+msgid "Import string translations"
+msgstr "Імпортувати переклади рядків"
+
+#: modules/import-export/import-export.php:72
+msgid "Export string translations"
+msgstr "Експортувати переклади рядків"
+
+#: modules/export/view-tab-export-strings.php:71
+msgid "Download"
+msgstr "Завантажити"
+
+#: modules/export/view-tab-export-strings.php:46
+msgid "Export all groups"
+msgstr "Еспортувати всі групи"
+
+#: modules/export/view-tab-export-strings.php:43
+msgid "Filter group"
+msgstr "Фільтрувати групи:"
+
+#: modules/export/view-tab-export-strings.php:27
+msgid "Target languages"
+msgstr "Цільові мови:"
+
+#: modules/export/export-strings-translations.php:132
+msgid "Error: Impossible to create a zip file."
+msgstr "Помилка: неможливо створити файл zip."
+
+#: modules/bulk-translate/bulk-translate.php:197
+msgid "Error: No target language has been selected. Please make sure to select at least one target language."
+msgstr "Помилка: не обрано цільової мови. Будь ласка, переконайтеся, що ви обрали принаймні одну цільову мову."
+
+#: modules/bulk-translate/bulk-translate.php:189
+msgid "No item has been selected. Please make sure to select at least one item to be translated."
+msgstr "Не обрано жодного елемента. Будь ласка, переконайтеся, що обрано принаймні один елемент для перекладу."
+
+#: integrations/acf/acf-sync-metas.php:85
+#: integrations/acf/acf-sync-metas.php:103
+msgid "Synchronize"
+msgstr "Синхронізувати"
+
+#: integrations/acf/acf-sync-metas.php:83
+#: integrations/acf/acf-sync-metas.php:102
+msgid "Copy once"
+msgstr "Скопіювати один раз"
+
+#: integrations/acf/acf-sync-metas.php:82
+#: integrations/acf/acf-sync-metas.php:101
+msgid "Ignore"
+msgstr "Ігнорувати"
+
+#: modules/po/po-import.php:47
+msgid "Error: Invalid file."
+msgstr "Помилка: Невірний файл."
+
+#. translators: %s is a file format, for example PO
+#: modules/import-export/file-format-factory.php:109
+msgid "Error: Wrong file format. The only supported file format is %s."
+msgstr "Помилка: Невірний формат файлу. Файлові формати, що підтримуються: %s."
+
+#: modules/import/view-tab-import-translations.php:26
+msgid "Upload"
+msgstr "Завантажити"
+
+#: modules/import/import-action.php:142
+msgid "Error: You are trying to import a file in a language which doesn't exist on your site."
+msgstr "Помилка: Ви намагаєтеся імпортувати файл мовою, що не існує на вашому сайті."
+
+#: modules/import/import-action.php:139
+msgid "Error: No target languages have been provided in the imported file."
+msgstr "Помилка: В імпортованому файлі відсутні цільві мови."
+
+#: modules/import/import-action.php:133
+msgid "Error: The site targeted in the imported file does not match the current site."
+msgstr "Помилка: Сайт, вказаний в імпортнованому файлі, не збігається з поточним сайтом."
+
+#. translators: %d is a number of strings translations
+#: modules/import/import-action.php:112
+msgid "%d string translation updated."
+msgid_plural "%d string translations updated."
+msgstr[0] "Оновлено переклад %d рядка."
+msgstr[1] "Оновлено переклад %d рядків."
+msgstr[2] "Оновлено переклад %d рядків."
+
+#: modules/import/import-action.php:83
+msgid "Error: You haven't selected a file to be uploaded."
+msgstr "Помилка: Ви не обрали файл для завантаження."
+
+#: modules/active-languages/active-languages.php:111
+msgid "Activate"
+msgstr "Активувати"
+
+#: modules/active-languages/active-languages.php:119
+msgid "Deactivate"
+msgstr "Вимкнути"
+
+#: integrations/acf/acf-sync-metas.php:61
+#: modules/rest/rest-translated-object.php:70
+#: modules/block-editor/js/sidebar/components/translations-table/index.js:51
+msgid "Translations"
+msgstr "Переклади"
+
+#: modules/metabox-button/metabox-button.php:165
+#: modules/block-editor/js/sidebar/components/synchronization-button/index.js:90
+msgid "You are about to overwrite an existing translation. Are you sure you want to proceed?"
+msgstr "Ви збираєтеся перезаписати існуючий переклад. Ви точно хочете продовжити?"
+
+#: modules/rest/rest-translated-object.php:55
+#: modules/block-editor/js/sidebar/components/switcher/index.js:156
+#: modules/block-editor/js/sidebar/components/switcher/index.js:157
+msgid "Language"
+msgstr "Мова"
+
+#: modules/xdata/xdata-session-manager.php:63
+#: tests/phpunit/tests/pro/test-xdata-session-manager.php:33
+#: tests/phpunit/tests/pro/test-xdata-session-manager.php:56
+#: tests/phpunit/tests/pro/test-xdata-session-manager.php:77
+msgid "An error has occurred."
+msgstr "Сталася помилка."
+
+#: modules/translate-slugs/translate-slugs-model.php:462
+msgid "URL slugs"
+msgstr "Частини посилання URL"
+
+#: modules/sync-post/sync-post-rest.php:53
+msgid "Synchronizations"
+msgstr "Синхронізації"
+
+#: modules/sync-post/sync-post-button.php:41
+#: tests/phpunit/tests/pro/test-ajax-metabox-button.php:93
+#: modules/block-editor/js/sidebar/components/synchronization-button/index.js:68
+#: modules/block-editor/js/sidebar/components/translations-table/index.js:60
+msgid "Don't synchronize this post"
+msgstr "Не синхронізувати цей допис"
+
+#: modules/sync-post/sync-post-button.php:40
+#: tests/phpunit/tests/pro/test-ajax-metabox-button.php:105
+#: modules/block-editor/js/sidebar/components/synchronization-button/index.js:68
+#: modules/block-editor/js/sidebar/components/synchronization-button/index.js:86
+#: modules/block-editor/js/sidebar/components/translations-table/index.js:60
+msgid "Synchronize this post"
+msgstr "Синхронізувати цей допис"
+
+#: modules/rest/rest-filtered-object.php:101
+msgid "Limit results to a specific language."
+msgstr "Обмежити результати конкретною мовою."
+
+#: modules/rest/rest-post.php:129
+msgid "Translations table"
+msgstr "Таблиця перекладів"
+
+#: modules/rest/rest-api.php:151
+msgid "Are we in a block editor context?"
+msgstr "Ми знаходимося в контексті блочного редактора?"
+
+#: modules/rest/rest-api.php:146
+msgid "Add this post's translation to results."
+msgstr "Додати переклад цього допису до результатів."
+
+#: modules/rest/rest-api.php:142
+msgid "Limit results to those matching a string."
+msgstr "Обмежити результати по запиту."
+
+#: modules/rest/rest-api.php:136
+msgid "Limit results to items in a language."
+msgstr "Обмежити результати елемантами певної мови."
+
+#: modules/rest/rest-api.php:130
+msgid "Limit results to untranslated items in a language."
+msgstr "Обмежити результати елементами, не перекладеними певною мовою."
+
+#: modules/rest/rest-api.php:124
+msgid "Limit results to items of an object type."
+msgstr "Обмежити результати елементами типу об'єкта."
+
+#: modules/media/settings-advanced-media.php:50
+msgid "Automatically duplicate media in all languages when uploading a new file."
+msgstr "Автоматичне дублювати медіа усіма мовами під час завантаження нового файлу."
+
+#: modules/media/settings-advanced-media.php:33
+msgid "Activate languages and translations for media. Provides options for multilingual media management."
+msgstr "Активувати мови і переклади для медіа. Надає налаштування для багатомовного керування медіа."
+
+#: modules/media/settings-advanced-media.php:32
+msgid "Media"
+msgstr "Медіа"
+
+#: modules/duplicate/duplicate.php:26
+#: tests/phpunit/tests/pro/test-ajax-metabox-button.php:43
+msgid "Deactivate content duplication"
+msgstr "Вимкнути дублювання вмісту"
+
+#: modules/duplicate/duplicate.php:25
+#: tests/phpunit/tests/pro/test-ajax-metabox-button.php:56
+msgid "Activate content duplication"
+msgstr "Активувати дублювання вмісту"
+
+#: modules/bulk-translate/view-bulk-translate.php:53
+msgid "Submit"
+msgstr "Відправити"
+
+#: modules/bulk-translate/view-bulk-translate.php:52
+#: modules/block-editor/js/sidebar/components/confirmation-modal/index.js:64
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: modules/sync-post/sync-post.php:46
+msgid "Synchronize original items with translation in selected languages"
+msgstr "Синхронізувати оригінальні елементи з перекладом обраними мовами"
+
+#: modules/media/admin-advanced-media.php:48 modules/sync-post/sync-post.php:56
+msgid "Copy original items to selected languages"
+msgstr "Копіювати оригінальні елементи обраними мовами"
+
+#: modules/bulk-translate/view-bulk-translate.php:33
+msgid "Action"
+msgstr "Дія"
+
+#: modules/bulk-translate/view-bulk-translate.php:17
+msgid "Bulk translate"
+msgstr "Масовий переклад"
+
+#. translators: %d is a number of posts
+#: modules/bulk-translate/bulk-translate-option.php:215
+msgid "To avoid overwriting content, %d translation was not created."
+msgid_plural "To avoid overwriting content, %d translations were not created."
+msgstr[0] "Щоб запобігти перезапису вмісту, не створено %d переклад."
+msgstr[1] "Щоб запобігти перезапису вмісту, не створено %d переклади."
+msgstr[2] "Щоб запобігти перезапису вмісту, не створено %d переклади."
+
+#. translators: %d is a number of posts
+#: modules/bulk-translate/bulk-translate-option.php:205
+msgid "%d translation created."
+msgid_plural "%d translations created."
+msgstr[0] "Створено %d переклад."
+msgstr[1] "Створено %d переклади."
+msgstr[2] "Створено %d перекладів."
+
+#: integrations/acf/acf-sync-metas.php:84
+#: modules/bulk-translate/bulk-translate.php:272
+msgid "Translate"
+msgstr "Перекласти"
+
+#: modules/active-languages/active-languages.php:117
+msgid "Deactivate this language"
+msgstr "Вимкнути цю мову"
+
+#: modules/active-languages/active-languages.php:109
+msgid "Activate this language"
+msgstr "Активувати цю мову"
+
+#. Author of the plugin
+msgid "WP SYNTEX"
+msgstr "WP SYNTEX"
+
+#. Description of the plugin
+msgid "Adds multilingual capability to WordPress"
+msgstr "Додає магатомовні властивості до WordPress"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://polylang.pro"
+msgstr "https://polylang.pro"
+
+#. Plugin Name of the plugin
+msgid "Polylang Pro"
+msgstr "Polylang Pro"

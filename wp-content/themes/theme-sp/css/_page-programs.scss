@@ -1,0 +1,525 @@
+.top {
+  min-height: 100vh;
+  background-image: url("../img/homeTop.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 112px 0 64px;
+  color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  @include sm{
+    //padding: 80px 0 48px;
+    padding: 80px 0 68px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    @include tr;
+  }
+
+  &__row {
+
+  }
+
+  &__title {
+    margin-bottom: 50px;
+
+    @include sm{
+      margin-bottom: 32px;
+    }
+
+    &:before {
+      width: 44px;
+      height: 192px;
+    }
+
+    span {
+      display: block;
+    }
+  }
+
+  &__desc {
+    font-size: 18px;
+    line-height: 150%;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    max-width: 320px;
+
+    @include md{
+      font-size: 16px;
+      max-width: none;
+    }
+    
+    @include sm{
+      font-size: 14px;
+    }
+
+    p {
+      font: inherit;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.pProg {
+  &:last-of-type{
+    margin-bottom: 104px;
+    @include md{
+      margin-bottom: 80px;
+    }
+    @include sm{
+      margin-bottom: 56px;
+    }
+  }
+
+
+  &__row {
+  }
+
+  &__title {
+  }
+
+  &__desc {
+    margin-bottom: 68px;
+
+    @include md{
+      margin-bottom: 50px;
+    }
+
+    @include sm{
+      margin-bottom: 32px;
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.program {
+  @include row();
+
+  &:not(:last-child){
+    margin-bottom: 68px;
+    @include sm{
+      margin-bottom: 40px;
+    }
+  }
+
+  @include sm{
+    flex-direction: column-reverse;
+  }
+
+  &__lt {
+    @include col(3);
+    padding-top: 40px;
+    
+    @include md{
+      @include col(4);
+    }
+    
+    @include sm{
+      @include col(8);
+      padding-top: 24px;
+    }
+
+  }
+
+  &__rt {
+    @include col(5, m);
+    height: 543px;
+    background-image: url("../img/program1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    @include md{
+      @include col(4, m);
+      height: 400px;
+    }
+    
+    @include sm{
+      @include col(8);
+      height: 247px;
+      margin-left: -10px;
+      width: calc(100% + 20px);
+    }
+  }
+
+  &__title {
+    margin-bottom: 40px;
+    @include sm{
+      margin-bottom: 16px;
+    }
+  }
+
+  &__txt {
+    margin-bottom: 32px;
+    @include sm{
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.pProgNum {
+  background: $grey2;
+  padding: 80px 0;
+  margin-top: 104px;
+
+  @include md{
+    margin-top: 80px;
+    padding: 60px 0;
+  }
+
+  @include sm{
+    margin-top: 56px;
+    padding: 32px 0;
+  }
+  .bTitle{
+    margin-top: 0;
+  }
+}
+
+.bAs {
+
+}
+
+.implement {
+
+  &__col {
+    align-self: stretch;
+
+    &_1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 100px;
+      align-self: flex-start;
+      min-height: 627px;
+      @include md{
+        display: none;
+      }
+    }
+
+    &_2 {
+    }
+
+    &_3 {
+    }
+  }
+
+  &__wNav {
+    position: relative;
+  }
+
+
+  &__progress {
+    position: absolute;
+    background: #F2F2F2;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    overflow: hidden;
+
+    &Bar {
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: $hover;
+      position: absolute;
+      @include tr(0.1s);
+    }
+  }
+
+  &__nav {
+    counter-reset: navItem;
+    max-width: 200px;
+    margin-bottom: 30px;
+
+    &Item {
+      &:not(:last-child) {
+        padding-bottom: 26px;
+        position: relative;
+      }
+    }
+
+    &Link {
+
+      padding-left: 50px;
+      position: relative;
+      @include tr;
+      font-size: 14px;
+      line-height: 125%;
+      color: #828282;
+      @include tr;
+
+      &:before {
+        counter-increment: navItem;
+        content: counter(navItem, decimal-leading-zero);
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 91.5%;
+        padding-left: 18px;
+      }
+
+      &._active {
+        color: $hover;
+      }
+    }
+  }
+
+  &__scroll {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+    &Btn {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+      
+      .circleProgress{
+        @include tr(0.1s);
+      }
+    }
+
+    &Img {
+      flex-shrink: 0;
+
+      path {
+        @include tr;
+        stroke: $red;
+      }
+
+      &:hover {
+        path {
+          fill: $hover;
+        }
+      }
+    }
+
+    &Title {
+      font-size: 10px;
+      line-height: 15px;
+      text-transform: uppercase;
+      color: #CB0D58;
+      margin-left: 24px;
+    }
+  }
+
+  &__btn {
+    margin-top: 32px;
+  }
+
+  &__items {
+    @include col(6);
+    @include md{
+      @include col(8);
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    //min-height: 100vh;
+    &:not(:last-child) {
+      margin-bottom: 104px;
+      @include md{
+        margin-bottom: 60px;
+      }
+      @include sm{
+        margin-bottom: 40px;
+      }
+    }
+    @include sm{
+      flex-direction: column-reverse;
+    }
+
+    &Rt {
+      flex-shrink: 0;
+      width: 487px;
+      margin-left: 20px;
+
+      @include md{
+        width: 55%;
+      }
+      @include sm{
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  &__img {
+    height: 626px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center top;
+    @include md{
+      height: 525px;
+    }
+    @include sm{
+      height: 260px;
+    }
+  }
+}
+
+.acc {
+  @include tr(1s);
+  overflow: hidden;
+  counter-reset: navItem;
+  padding-top: 2px;
+
+  @include md{
+    margin-top: 32px;
+  }
+
+  &_mb {
+    margin-bottom: 0;
+    @include md{
+      margin-top: 0;
+    }
+  }
+
+  &__item {
+    border-bottom: 1px solid #E0E0E0;
+
+    &:not(:last-child) {
+      margin-bottom: 24px;
+      @include sm{
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  &__head {
+    position: relative;
+    padding-right: 60px;
+    margin-bottom: 24px;
+
+    @include sm{
+      margin-bottom: 16px;
+    }
+
+    &._active, &._active:hover {
+      .acc__btn {
+        &:after {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    &:hover {
+      .acc__btn {
+        border-color: $hover;
+      }
+    }
+  }
+
+  &__title {
+    position: relative;
+    padding-left: 50px;
+    max-width: 487px;
+
+    @include sm{
+      padding-left: 31px;
+    }
+
+    &:before {
+      counter-increment: navItem;
+      content: counter(navItem, decimal-leading-zero);
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #CB0D58;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 0.7px #CB0D58;
+    }
+  }
+
+  &__btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #E0E0E0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -20px;
+    @include tr;
+    
+    @include sm{
+      width: 33px;
+      height: 33px;
+      margin-top: -16px;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      left: 50%;
+      margin-left: -7.5px;
+      top: 50%;
+      width: 16px;
+      height: 1px;
+      background: $hover;
+      @include tr;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      left: 50%;
+      margin-top: -7.5px;
+      top: 50%;
+      height: 16px;
+      width: 1px;
+      background: $hover;
+      @include tr;
+    }
+  }
+
+  &__cont {
+
+  }
+
+  &__desc {
+    padding: 8px 0 51px;
+
+    @include sm{
+      padding: 8px 0 24px;
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,164 @@
+.top3 {
+  min-height: 440px;
+  padding: 112px 0 72px;
+  display: flex;
+  align-content: stretch;
+
+  @include md{
+    padding: 80px 0 32px;
+  }
+
+  &__box {
+  }
+
+
+  &__row {
+  }
+
+  &__rt {
+    @include md{
+      margin-top: 32px;
+    }
+  }
+
+  &__img{
+    margin-right: -55px;
+    max-width: calc(100% + 55px);
+    @include md{
+      margin-right: 0;
+      width: calc(100% + 24px);
+      margin-left: -12px;
+    }
+  }
+
+  &__title {
+    color: $black;
+    margin-bottom: 56px;
+
+    span {
+      display: block;
+    }
+
+    @include xl{
+      margin-bottom: 34px;
+    }
+    @include lg{
+      margin-bottom: 28px;
+    }
+    @include md{
+      margin-bottom: 22px;
+    }
+
+    @include sm{
+      margin-bottom: 16px;
+    }
+  }
+
+  &__info {
+    display: flex;
+
+    &Pic {
+      width: 48px;
+      height: 48px;
+      margin-right: 24px;
+      margin-top: 11px;
+      flex-shrink: 0;
+      @include df;
+      @include jcc;
+      @include aic;
+      background: $red;
+      border-radius: 50%;
+      @include md{
+        margin-top: 0;
+      }
+      @include sm{
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+        display: none;
+      }
+    }
+
+    &Ic {
+      flex-shrink: 0;
+      display: block;
+    }
+
+    &Rt {
+      width: 100%;
+      max-width: 300px;
+      color: $black;
+      @include sm{
+        max-width: none;
+      }
+    }
+
+    &Title {
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 35px;
+      margin-bottom: 40px;
+      color: #000000;
+      @include lg{
+        font-size: 22px;
+        line-height: 1.5;
+      }
+      @include md{
+        font-size: 20px;
+      }
+      @include sm{
+        font-size: 18px;
+        margin-bottom: 32px;
+      }
+    }
+
+    .bContact__link {
+      &:not(:hover) {
+        color: $black;
+      }
+    }
+  }
+
+  &__btn {
+    margin-top: 40px;
+  }
+
+
+}
+
+.pCont {
+  border-top: 1px solid #E0E0E0;
+  padding: 48px 0 136px;
+
+  @include md{
+    padding-bottom: 80px;
+  }
+
+  &__row {
+  }
+
+  &__title {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: #828282;
+    margin-bottom: 16px;
+  }
+
+  &__desc {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    p{
+      font: inherit;
+    }
+  }
+
+  .form__group{
+    @include md{
+      &:last-child{
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
