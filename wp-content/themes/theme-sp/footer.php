@@ -212,7 +212,7 @@
 
       <div class="footer__bottom">
         <p class="footer__copy"><?php the_field('f_copy', 'options'); ?></p>
-		<a href="https://in-create.com/" class="footer__made" target="_blank">
+		<a href="https://in-create.com/" class="footer__made" target="_blank" rel="nofollow">
           <img data-src="<?php bloginfo("template_directory"); ?>/img/made.svg" class="footer__made-img imgSize" alt="made" width="103" height="10">
         </a>
       </div>

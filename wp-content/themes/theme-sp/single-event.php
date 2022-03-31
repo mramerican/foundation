@@ -74,7 +74,6 @@ if ($cats) {
 
           <a href="#nextB" class="topEv__down down" data-an="_zoom">
             <img class="down__img imgSize" data-src="<?php bloginfo("template_directory"); ?>/img/down.svg" alt="down-ic" width="33" height="33">
-            >
           </a>
         </div>
 

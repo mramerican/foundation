@@ -57,8 +57,17 @@ $dir = get_bloginfo("template_directory") . "/";
                     $url = $link['url'] ? : '#';
                     $title = $link['title'] ? : __('Детальніше', 'theme-sp');
                     $target = $link['target'] ? ' target="_blank"' : '';
+                    $nofollow = mb_stripos($url, 'trener1.com.ua') !== false ? ' rel="nofollow"' : '';
                     ?>
-                    <a href="<?= $url ?>" class="mainTop__btn btn-circle" data-an="_fadeBtnCircle"<?= $target ?>><?= $title ?></a>
+                    <a
+                        href="<?= $url ?>"
+                        class="mainTop__btn btn-circle"
+                        data-an="_fadeBtnCircle"
+                        <?= $target ?>
+                        <?= $nofollow ?>
+                    >
+                        <?= $title ?>
+                    </a>
                     <?php
                   } ?>
                 </div>

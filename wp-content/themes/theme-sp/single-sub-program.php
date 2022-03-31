@@ -43,7 +43,6 @@ if ($cats) {
     <div class="container">
       <a href="#nextB" class="down">
         <img class="down__img imgSize" data-src="<?php bloginfo("template_directory"); ?>/img/down.svg" alt="down-ic" data-an="_zoom" width="33" height="33">
-        >
       </a>
     </div>
   </section>
