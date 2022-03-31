@@ -18,6 +18,9 @@
  * @package WordPress
  */
 
+define( 'FORCE_SSL_LOGIN', 0);
+define( 'FORCE_SSL_ADMIN', 0);
+
 // ** Параметры базы данных: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
 define( 'DB_NAME', 'wordpress' );
