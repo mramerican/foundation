@@ -7,3 +7,6 @@ log.*
 
 */cache/thumb/*
 wp-admin/4407418d232928268fe4ffdf254c5d27
+
+wp-content/cache/autoptimize/css/*.css
+wp-content/cache/autoptimize/js/*.js
