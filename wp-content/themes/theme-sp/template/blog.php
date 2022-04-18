@@ -1,12 +1,10 @@
 <?php $cat = get_field('blog_cat');
 if ($cat) { ?>
   <div class="bBlog__row">
-
     <div class="bNews">
-      <?php foreach ($cat as $it) { ?>
-        <?php
-        $post = $it;
-        setup_postdata($post);
+      <?php $the_query = new WP_Query( 'posts_per_page=3' ); ?>
+      <?php while ($the_query -> have_posts()) : $the_query -> the_post(); ?>
+      <?php
         $tumb = get_field('prev_img') ? : get_bloginfo("template_directory") . "/img/bNews1.jpg";
         $t = get_field('prev_t') ? : get_the_title();
         $d = get_field('prev_d');
@@ -31,8 +29,10 @@ if ($cat) { ?>
             <img class="bNews__img" data-src="<?= kama_thumb_src( 'w=364 &h=232 &crop=top', $tumb ) ?>" alt="Parimatch Foundation - <?= $alt ?>" width="364" height="232">
           </div>
         </a>
-      <?php }
-      wp_reset_postdata(); ?>
+      <?php
+      endwhile;
+      wp_reset_postdata();
+      ?>
     </div>
     <?php $link = get_field('blog_link');
     if ($link) {
