@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-json/
+Disallow: */xmlrpc.php
+Disallow: */author
+Disallow: *?s=
+Allow: *.js
+Allow: *.css
+Allow: *.jpeg
+Allow: *.jpg
+Allow: *.png
+Allow: *.svg
+
+Sitemap: https://parimatch.foundation/sitemap.xml

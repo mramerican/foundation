@@ -84,7 +84,7 @@
                 <a href="mailto:<?= $email ?>"><?= $email ?></a>
               </p>
             <?php endif; ?>
-            <?php if ($privacy_policy = get_field('f_privacy_policy', 'options')): ?>
+			<?php if ($privacy_policy = get_field('f_privacy_policy', 'options')): ?>
               <div class="footer__ul">
                   <a href="<?= $privacy_policy ?>"><?php _e('Політика конфіденційності', 'theme-sp'); ?></a>
               </div>
