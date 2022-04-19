@@ -2,7 +2,7 @@
 session_start();
 $tY  = gmdate("D, d M Y");
 $tH  = gmdate("H");
-$tH = $tH >= 23 ? 23 : $tH >= 15 ? 15 : 7;
+$tH = $tH >= 23 ? 23 : ($tH >= 15 ? 15 : 7);
 $tI  = get_post_modified_time('i');
 if(!$tI){
   $tI  = random_int(1, 59);
