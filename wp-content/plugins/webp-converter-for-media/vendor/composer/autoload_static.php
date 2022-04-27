@@ -120,6 +120,7 @@ class ComposerStaticInit024f0a84246706a5ce089d47fa9fe20c
         'WebpConverter\\Exception\\ExtensionUnsupportedException' => __DIR__ . '/../..' . '/src/Exception/ExtensionUnsupportedException.php',
         'WebpConverter\\Exception\\FilesizeOversizeException' => __DIR__ . '/../..' . '/src/Exception/FilesizeOversizeException.php',
         'WebpConverter\\Exception\\FunctionUnavailableException' => __DIR__ . '/../..' . '/src/Exception/FunctionUnavailableException.php',
+        'WebpConverter\\Exception\\ImageAnimatedException' => __DIR__ . '/../..' . '/src/Exception/ImageAnimatedException.php',
         'WebpConverter\\Exception\\ImageInvalidException' => __DIR__ . '/../..' . '/src/Exception/ImageInvalidException.php',
         'WebpConverter\\Exception\\ImagickNotSupportWebpException' => __DIR__ . '/../..' . '/src/Exception/ImagickNotSupportWebpException.php',
         'WebpConverter\\Exception\\ImagickUnavailableException' => __DIR__ . '/../..' . '/src/Exception/ImagickUnavailableException.php',

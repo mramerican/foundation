@@ -5,6 +5,7 @@ namespace WebpConverter\Loader;
 use WebpConverter\Service\PathsGenerator;
 use WebpConverter\Settings\Option\ExtraFeaturesOption;
 use WebpConverter\Settings\Option\LoaderTypeOption;
+use WebpConverter\Settings\Option\OutputFormatsOption;
 use WebpConverter\Settings\Option\SupportedExtensionsOption;
 
 /**
@@ -26,7 +27,7 @@ class HtaccessLoader extends LoaderAbstract {
 	 * {@inheritdoc}
 	 */
 	public function activate_loader( bool $is_debug = false ) {
-		$settings = ( $is_debug ) ? $this->plugin_data->get_debug_settings() : $this->plugin_data->get_plugin_settings();
+		$settings = ( ! $is_debug ) ? $this->plugin_data->get_plugin_settings() : $this->plugin_data->get_debug_settings();
 
 		$this->deactivate_loader();
 
@@ -157,7 +158,7 @@ class HtaccessLoader extends LoaderAbstract {
 			$output_path .= '/' . $output_path_suffix;
 		}
 
-		foreach ( $this->get_mime_types() as $format => $mime_type ) {
+		foreach ( $this->format_factory->get_mime_types( $settings[ OutputFormatsOption::OPTION_NAME ] ) as $format => $mime_type ) {
 			$content .= '<IfModule mod_rewrite.c>' . PHP_EOL;
 			$content .= '  RewriteEngine On' . PHP_EOL;
 			foreach ( $settings[ SupportedExtensionsOption::OPTION_NAME ] as $ext ) {
@@ -214,7 +215,7 @@ class HtaccessLoader extends LoaderAbstract {
 
 		$content .= '<IfModule mod_expires.c>' . PHP_EOL;
 		$content .= '  ExpiresActive On' . PHP_EOL;
-		foreach ( $this->get_mime_types() as $format => $mime_type ) {
+		foreach ( $this->format_factory->get_mime_types( $settings[ OutputFormatsOption::OPTION_NAME ] ) as $format => $mime_type ) {
 			$content .= "  ExpiresByType ${mime_type} \"access plus 1 year\"" . PHP_EOL;
 		}
 		$content .= '</IfModule>';
@@ -236,7 +237,7 @@ class HtaccessLoader extends LoaderAbstract {
 		}
 
 		$content .= '<IfModule mod_mime.c>' . PHP_EOL;
-		foreach ( $this->get_mime_types() as $format => $mime_type ) {
+		foreach ( $this->format_factory->get_mime_types( $settings[ OutputFormatsOption::OPTION_NAME ] ) as $format => $mime_type ) {
 			$content .= "  AddType ${mime_type} .${format}" . PHP_EOL;
 		}
 		$content .= '</IfModule>';

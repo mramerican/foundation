@@ -387,6 +387,11 @@ After making changes, remember to restart the machine: `systemctl restart nginx`
 
 == Changelog ==
 
+= 4.3.2 (2022-04-20) =
+* `[Added]` Added conversion skip for animated GIF images
+* `[Added]` Added new information about status of image conversion
+* `[Added]` Added ability to convert only to AVIF format
+
 = 4.3.1 (2022-04-05) =
 * `[Fixed]` Generating rewrite rules for via .htaccess loading mode
 

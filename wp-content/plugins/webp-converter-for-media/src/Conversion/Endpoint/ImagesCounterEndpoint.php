@@ -48,7 +48,7 @@ class ImagesCounterEndpoint extends EndpointAbstract {
 	 * {@inheritdoc}
 	 */
 	public function get_route_response( \WP_REST_Request $request ) {
-		$images_count = count( ( new PathsFinder( $this->plugin_data, $this->token_repository ) )->get_paths( false ) );
+		$images_count = count( ( new PathsFinder( $this->plugin_data, $this->token_repository ) )->get_paths( true ) );
 		$this->stats_manager->set_calculation_images_count( $images_count );
 
 		return new \WP_REST_Response(

@@ -2,6 +2,7 @@
 
 namespace WebpConverter\Settings\Option;
 
+use WebpConverter\Conversion\Format\AvifFormat;
 use WebpConverter\Conversion\Format\FormatFactory;
 use WebpConverter\Conversion\Format\WebpFormat;
 use WebpConverter\WebpConverterConstants;
@@ -96,6 +97,15 @@ class OutputFormatsOption extends OptionAbstract {
 		$formats = array_keys( $this->formats_integration->get_available_formats( $method ) );
 
 		return ( in_array( WebpFormat::FORMAT_EXTENSION, $formats ) ) ? [ WebpFormat::FORMAT_EXTENSION ] : [];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @return string[]
+	 */
+	public function get_value_for_debug( array $settings ): array {
+		return [ WebpFormat::FORMAT_EXTENSION, AvifFormat::FORMAT_EXTENSION ];
 	}
 
 	/**

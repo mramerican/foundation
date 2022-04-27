@@ -105,6 +105,7 @@ return array(
     'WebpConverter\\Exception\\ExtensionUnsupportedException' => $baseDir . '/src/Exception/ExtensionUnsupportedException.php',
     'WebpConverter\\Exception\\FilesizeOversizeException' => $baseDir . '/src/Exception/FilesizeOversizeException.php',
     'WebpConverter\\Exception\\FunctionUnavailableException' => $baseDir . '/src/Exception/FunctionUnavailableException.php',
+    'WebpConverter\\Exception\\ImageAnimatedException' => $baseDir . '/src/Exception/ImageAnimatedException.php',
     'WebpConverter\\Exception\\ImageInvalidException' => $baseDir . '/src/Exception/ImageInvalidException.php',
     'WebpConverter\\Exception\\ImagickNotSupportWebpException' => $baseDir . '/src/Exception/ImagickNotSupportWebpException.php',
     'WebpConverter\\Exception\\ImagickUnavailableException' => $baseDir . '/src/Exception/ImagickUnavailableException.php',
