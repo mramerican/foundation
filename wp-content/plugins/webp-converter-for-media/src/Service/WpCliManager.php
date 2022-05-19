@@ -2,6 +2,8 @@
 
 namespace WebpConverter\Service;
 
+use WebpConverter\Conversion\Format\AvifFormat;
+use WebpConverter\Conversion\Format\WebpFormat;
 use WebpConverter\Conversion\Method\MethodIntegrator;
 use WebpConverter\Conversion\PathsFinder;
 use WebpConverter\HookableInterface;
@@ -51,7 +53,8 @@ class WpCliManager implements HookableInterface {
 		);
 
 		$images_count = count(
-			( new PathsFinder( $this->plugin_data, $this->token_repository ) )->get_paths( true )
+			( new PathsFinder( $this->plugin_data, $this->token_repository ) )
+				->get_paths( true, [ AvifFormat::FORMAT_EXTENSION, WebpFormat::FORMAT_EXTENSION ] )
 		);
 
 		\WP_CLI::success(
