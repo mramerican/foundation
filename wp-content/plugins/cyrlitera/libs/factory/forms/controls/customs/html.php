@@ -14,9 +14,9 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryForms451_Html') ) {
+	if( !class_exists('Wbcr_FactoryForms453_Html') ) {
 
-		class Wbcr_FactoryForms451_Html extends Wbcr_FactoryForms451_CustomElement {
+		class Wbcr_FactoryForms453_Html extends Wbcr_FactoryForms453_CustomElement {
 
 			public $type = 'html';
 
