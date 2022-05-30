@@ -90,6 +90,22 @@ function breadcrumbCat($title, $catName)
   <?php
 }
 
+function insertDonateBtnWithContent()
+{
+  $content = get_field('cont');
+  if ($btn = get_field('h_btn', 'options')){
+    $url = $btn['url'] ?: '#';
+    $title = $btn['title'] ?: 'link';
+    $target = $btn['target'] ? ' target="_blank"' : '';
+
+    $insertBtn = '<a href="'.$url.'" '.$target.' class="btn-red content-btn">'.$title.'</a>';
+
+    $content = str_replace('{{donateBtn}}', $insertBtn, $content);
+  }
+
+  return $content;
+}
+
 add_action('after_setup_theme', 'true_load_theme_textdomain');
 
 function true_load_theme_textdomain()

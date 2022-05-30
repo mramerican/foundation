@@ -58,7 +58,7 @@ if ($cats) {
           <img class="article__tumb imgSizeK" data-src="<?= kama_thumb_src('w=825 &h=480 &crop=top', $img ? : get_bloginfo("template_directory") . '/img/article.jpg') ?>" alt="Parimatch Foundation - <?= $alt ?>" data-an="_imgL2R" width="825" height="480">
           <div class="article__desc" data-an="_fadeUp20"><?php the_field('d'); ?></div>
 
-          <div class="article__cont" data-an="_fadeUp20"><?php the_field('cont'); ?></div>
+          <div class="article__cont" data-an="_fadeUp20"><?= insertDonateBtnWithContent() ?></div>
 
           <div class="articleShare">
             <div class="articleShare__title" data-an="_fadeUp20"><?php _e('Поделиться', 'theme-sp'); ?>:</div>
