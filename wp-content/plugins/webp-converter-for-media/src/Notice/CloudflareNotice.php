@@ -33,7 +33,7 @@ class CloudflareNotice extends NoticeAbstract implements NoticeInterface {
 	 */
 	public function is_available(): bool {
 		$cdn_server = strtolower( $_SERVER['HTTP_CDN_LOOP'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-		if ( $cdn_server !== 'cloudflare' ) {
+		if ( ( strpos( $cdn_server, 'cloudflare' ) !== false ) && ! is_plugin_active( 'cloudflare/cloudflare.php' ) ) {
 			return false;
 		}
 

@@ -1,7 +1,7 @@
-=== Converter for Media - Convert WebP and AVIF & Optimize Images ===
+=== Converter for Media - Convert WebP and AVIF & Optimize Images | Ease image optimization ===
 Contributors: mateuszgbiorczyk
 Donate link: https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=readme-donate
-Tags: convert webp, webp converter, optimize images, image optimization, compress images
+Tags: convert webp, webp, optimize images, image optimization, compress images
 Requires at least: 4.9
 Tested up to: 6.0
 Requires PHP: 7.0
@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Speed up your website by serving WebP and AVIF images instead of standard formats JPEG, PNG and GIF. Reduce image size just now by image optimization!
+Speed up your website by using our WebP & AVIF Converter. Serve WebP and AVIF images instead of standard formats JPEG, PNG and GIF just now!
 
 == Description ==
 
@@ -17,7 +17,7 @@ Speed up your website by serving WebP and AVIF images instead of standard format
 
 After installing the plugin you do not have to do anything more. Your current images will be converted into a new format. When image optimization by our image optimizer is finished, users will automatically receive new, much lighter images than the original ones.
 
-As of today, over 90% of users use browsers that support the WebP format. The loading time of your website depends to a large extent on its weight and the level of image optimization. **Using our image optimizer, now you can and speed up it in a few seconds without much effort!**
+As of today, over 90% of users use browsers that support the WebP format. The loading time of your website depends to a large extent on its weight and the level of image optimization. **Using our WebP Converter, now you can and speed up it in a few seconds without much effort!**
 
 This will be a profit both for your users who will not have to download so much data, but also for a server that will be less loaded. Remember that a better optimized website also affects your Google ranking. Image optimization is very important.
 
@@ -58,7 +58,7 @@ If you would like to appreciate it, you can try [the PRO version](https://mattpl
 
 1. Upload the plugin files to `/wp-content/plugins/webp-converter-for-media` directory, or install plugin through the WordPress plugins screen directly.
 2. Activate plugin through `Plugins` screen in WordPress Admin Panel.
-3. Use `Settings -> Settings -> WebP Converter` screen to configure the plugin.
+3. Use `Settings -> Settings -> Converter for Media` screen to configure the plugin.
 4. Click on the button `Regenerate All`.
 5. Check if everything works fine.
 
@@ -194,7 +194,7 @@ add_filter( 'webpc_dir_name', function( $path, $directory ) {
 	return '/';
 } );`
 
-After setting the filters go to `Settings -> WebP Converter` in the admin panel and click the `Save Changes` button. `.htaccess` files with appropriate rules should be created in the directories `/uploads` and `/uploads-webpc`.
+After setting the filters go to `Settings -> Converter for Media` in the admin panel and click the `Save Changes` button. `.htaccess` files with appropriate rules should be created in the directories `/uploads` and `/uploads-webpc`.
 
 = How to exclude paths from converting? =
 
@@ -328,6 +328,10 @@ After making changes, remember to restart the machine:
 2. Screenshot when regenerating images
 
 == Changelog ==
+
+= 4.3.5 (2022-06-02) =
+* `[Changed]` Generating rewrite rules for via .htaccess loading mode (applies to rewrites_not_working server configuration error)
+* `[Added]` Support for Hide My WP plugin
 
 = 4.3.4 (2022-05-10) =
 * `[Changed]` Generating rewrite rules for via .htaccess loading mode (applies to rewrites_not_working server configuration error)
