@@ -329,6 +329,9 @@ After making changes, remember to restart the machine:
 
 == Changelog ==
 
+= 4.3.6 (2022-06-03) =
+* `[Fixed]` Notification about Cloudflare cache
+
 = 4.3.5 (2022-06-02) =
 * `[Changed]` Generating rewrite rules for via .htaccess loading mode (applies to rewrites_not_working server configuration error)
 * `[Added]` Support for Hide My WP plugin
