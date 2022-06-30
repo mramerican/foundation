@@ -19,6 +19,15 @@ class DirectoryIntegration implements HookableInterface {
 	private $directories = [];
 
 	/**
+	 * @var OutputPath
+	 */
+	private $output_path;
+
+	public function __construct( OutputPath $output_path = null ) {
+		$this->output_path = $output_path ?: new OutputPath();
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function init_hooks() {
@@ -63,7 +72,7 @@ class DirectoryIntegration implements HookableInterface {
 		$values = [];
 		foreach ( $this->directories as $directory ) {
 			if ( ! $directory->is_output_directory()
-				&& ( $output_path = OutputPath::get_directory_path( $directory->get_server_path() ) )
+				&& ( $output_path = $this->output_path->get_directory_path( $directory->get_server_path() ) )
 				&& ( $output_path !== $directory->get_server_path() ) ) {
 				$values[ $directory->get_type() ] = $output_path;
 			}
@@ -132,7 +141,7 @@ class DirectoryIntegration implements HookableInterface {
 			}
 		}
 
-		$source_url = apply_filters( 'webpc_site_url', get_site_url() );
+		$source_url = apply_filters( 'webpc_site_url', get_home_url() );
 		return sprintf( '%1$s/%2$s', $source_url, $directory_name );
 	}
 }

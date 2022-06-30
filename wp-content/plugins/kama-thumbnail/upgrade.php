@@ -10,7 +10,7 @@ namespace Kama_Thumbnail;
 function upgrade(){
 	$ver_key = 'kama_thumb_version';
 
-	$cur_ver = get_file_data( KT_MAIN_FILE, [ 'Version' =>'Version' ] )['Version'];
+	$cur_ver = get_file_data( KTHUMB_MAIN_FILE, [ 'Version' =>'Version' ] )['Version'];
 	$old_ver = get_option( $ver_key );
 
 	if( $old_ver === $cur_ver ){

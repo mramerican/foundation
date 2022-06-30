@@ -1,6 +1,6 @@
 === Plugin Name ===
 Stable tag: trunk
-Tested up to: 5.9
+Tested up to: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Contributors: Tkama
@@ -316,6 +316,11 @@ If you are themes developer, and need all it functionality, but you need to inst
 
 
 == Changelog ==
+
+= 3.3.8 =
+- NEW: hook `kama_thumb__replece_in_content_args`.
+- NEW: `wh` parameter - set width & height params at once. Example: `kama_thumb_img( 'wh=200:300' )`.
+- Refactor.
 
 = 3.3.7 =
 - FIX: `crop` parameter fixes.

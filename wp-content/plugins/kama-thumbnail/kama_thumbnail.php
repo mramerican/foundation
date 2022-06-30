@@ -14,35 +14,47 @@
  * Requires PHP: 5.6
  * Requires at least: 4.7
  *
- * Version: 3.3.7
+ * Version: 3.3.8
  */
 
-const KT_MAIN_FILE = __FILE__;
+const KTHUMB_MAIN_FILE = __FILE__;
 
-define( 'KT_PATH', wp_normalize_path( __DIR__ . '/' ) );
+define( 'KTHUMB_DIR', wp_normalize_path( __DIR__ ) );
 
-// as a plugin
+// as plugin
 if(
-	false !== strpos( KT_PATH, wp_normalize_path( WP_PLUGIN_DIR ) )
+	false !== strpos( KTHUMB_DIR, wp_normalize_path( WP_PLUGIN_DIR ) )
 	||
-	false !== strpos( KT_PATH, wp_normalize_path( WPMU_PLUGIN_DIR ) )
+	false !== strpos( KTHUMB_DIR, wp_normalize_path( WPMU_PLUGIN_DIR ) )
 ){
-	define( 'KT_URL', plugin_dir_url(__FILE__) );
+	define( 'KTHUMB_URL', plugin_dir_url( __FILE__ ) );
 }
-// from the theme
+// in theme
 else {
-	define( 'KT_URL', strtr( KT_PATH, [ wp_normalize_path( get_template_directory() ) => get_template_directory_uri() ] ) );
+	define( 'KTHUMB_URL', strtr( KTHUMB_DIR, [ wp_normalize_path( get_template_directory() ) => get_template_directory_uri() ] ) );
 }
 
-require KT_PATH . 'class-Kama_Thumbnail__Admin.php';
-require KT_PATH . 'class-Kama_Thumbnail__Clear_Cache.php';
-require KT_PATH . 'class-Kama_Thumbnail.php';
-require KT_PATH . 'class-Kama_Make_Thumb.php';
-require KT_PATH . 'functions.php';
 
+// load files
+
+spl_autoload_register( static function( $name ){
+
+	if( 'Kama_Make_Thumb' === $name || false !== strpos( $name, 'Kama_Thumbnail' ) ){
+
+		require KTHUMB_DIR . "/classes/$name.php";
+	}
+} );
+
+require KTHUMB_DIR . '/functions.php';
+
+
+// init
 
 if( defined( 'WP_CLI' ) ){
-	require KT_PATH . 'class-Kama_Thumb_CLI.php';
+
+	WP_CLI::add_command( 'kthumb', 'Kama_Thumbnail_CLI_Command', [
+		'shortdesc' => 'Kama Thumbnail CLI Commands',
+	] );
 }
 
 /**
@@ -64,7 +76,7 @@ add_action( 'init', 'kama_thumbnail_init' );
 function kama_thumbnail_init(){
 
 	if( ! defined( 'DOING_AJAX' ) ){
-		load_plugin_textdomain( 'kama-thumbnail', false, basename( KT_PATH ) . '/languages' );
+		load_plugin_textdomain( 'kama-thumbnail', false, basename( KTHUMB_DIR ) . '/languages' );
 	}
 
 	Kama_Thumbnail::init();
