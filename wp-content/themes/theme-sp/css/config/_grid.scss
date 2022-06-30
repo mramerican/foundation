@@ -120,6 +120,7 @@ $break_xxs_container: 100%;
   padding: $containet_padding;
   position: relative;
   width: $break_xxl_container;
+  max-width: 100%;
 
   @include xl {
     width: $break_xl_container;
