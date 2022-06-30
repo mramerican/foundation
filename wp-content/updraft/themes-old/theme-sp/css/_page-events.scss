@@ -1,0 +1,831 @@
+.topEv {
+  min-height: 100vh;
+  background-image: url("../img/eventTop.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 112px 0 64px;
+  color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include md {
+    padding: 80px 0 57px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    @include tr;
+  }
+
+  &__box {
+    flex-grow: 2;
+    display: flex;
+    align-content: stretch;
+  }
+
+  &__row {
+    flex-grow: 2;
+    align-items: stretch;
+    align-content: stretch;
+    @include sm {
+      align-items: flex-start;
+      align-content: space-between;
+    }
+  }
+
+  &__lt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__title {
+    margin-bottom: 50px;
+    flex-shrink: 0;
+    width: 100%;
+
+    &:before {
+      width: 44px;
+      height: 192px;
+    }
+
+    span {
+      display: block;
+    }
+  }
+
+  &__down {
+    margin-top: auto;
+    flex-shrink: 0;
+    @include sm {
+      display: none;
+    }
+  }
+
+  &__desc {
+    font-size: 18px;
+    line-height: 150%;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    max-width: 318px;
+    @include md {
+      font-size: 16px;
+    }
+
+    @include sm {
+      display: none;
+    }
+
+    p {
+      font: inherit;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.dateB {
+  margin-top: 49px;
+  border-top: 1px solid #fff;
+  padding-top: 48px;
+  color: #fff;
+  max-width: 318px;
+
+  @include sm {
+    max-width: 100%;
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+  }
+
+  &_black {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+
+    &_mod {
+      margin-left: auto;
+      @include md {
+        margin: 0 auto 48px;
+      }
+    }
+
+    &:not(.dateB__day) {
+      color: $black;
+    }
+
+    .dateB__day {
+      color: $hover;
+    }
+
+    .dateB__week, .dateB__dur {
+      color: #828282;
+    }
+
+    .dateB__time {
+      text-shadow: none;
+    }
+
+    .dateB__shareIc {
+      path {
+        stroke: $hover;
+      }
+    }
+  }
+
+  &_bred {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+
+    .dateB__week, .dateB__dur {
+      color: #fff;
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    @include sm {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__lt {
+    display: flex;
+  }
+
+  &__rt {
+    margin-left: 10px;
+    text-align: right;
+  }
+
+  &__dateRt {
+    margin-left: 19px;
+  }
+
+  &__day {
+    font-family: $font2;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1;
+    text-transform: uppercase;
+    margin-top: -15px;
+  }
+
+  &__month {
+    font-family: $font2;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    margin-bottom: 4px;
+    margin-top: -0.4em;
+  }
+
+  &__week {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 150%;
+    color: #BDBDBD;
+  }
+
+  &__time {
+    font-size: 18px;
+    line-height: 150%;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    margin-bottom: 3px;
+  }
+
+  &__dur {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 150%;
+    color: #BDBDBD;
+  }
+
+  &__btn {
+    width: 100%;
+  }
+
+  &__share {
+    margin: 32px auto 0;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 12px;
+    position: relative;
+
+    &Title {
+      @include tr;
+    }
+
+    &Ic {
+      margin-right: 8px;
+
+      path {
+        @include tr;
+      }
+    }
+
+    &:hover {
+
+      .dateB__shareTitle {
+        color: $hover;
+      }
+
+      .dateB__shareIc {
+        path {
+          stroke: $hover;
+        }
+      }
+    }
+  }
+}
+
+
+.bEvents {
+
+}
+
+.events {
+  padding: 22px 0;
+  border-top: 1px solid #E0E0E0;
+
+  &:last-child {
+    border-bottom: 1px solid #E0E0E0;
+  }
+
+  @include sm {
+    padding: 12px 0 24px;
+  }
+
+  &__col {
+
+    &_1 {
+      margin-top: -15px;
+
+      @include lg {
+        width: 15%;
+      }
+      @include md {
+        order: -2;
+        @include col(3, m);
+      }
+      @include sm {
+        margin-top: -10px;
+      }
+    }
+
+    &_2 {
+    }
+
+    &_3 {
+      @include lg {
+        width: 43%;
+      }
+      @include md {
+        @include col(8, m);
+      }
+    }
+
+    &_4 {
+      @include md {
+        order: -1;
+        text-align: right;
+      }
+    }
+  }
+
+  &__date {
+    display: flex;
+    align-items: flex-start;
+
+    &Rt {
+      margin-left: 19px;
+      padding-top: 5px;
+      @include sm {
+        margin-left: 8px;
+        padding-top: 7px;
+      }
+    }
+  }
+
+  &__day {
+    font-family: $font2;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #CB0D58;
+
+    @include sm {
+      font-size: 40px;
+      line-height: 48px;
+    }
+  }
+
+  &__month {
+    font-family: $font2;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    color: #CB0D58;
+    margin-bottom: 4px;
+    @include sm {
+      font-size: 16px;
+      line-height: 150%;
+      margin-bottom: 0;
+    }
+  }
+
+  &__week {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 150%;
+    color: #828282;
+    @include sm {
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 150%;
+    }
+  }
+
+  &__pic {
+    height: 221px;
+    display: block;
+    background-image: url("../img/event1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    @include md {
+      margin: 12px 0 16px;
+      height: 350px;
+    }
+    @include sm {
+      height: 220px;
+    }
+  }
+
+  &__info {
+    padding-left: 35px;
+    @include lg {
+      padding-left: 15px;
+    }
+    @include md {
+      padding-left: 0;
+    }
+  }
+
+  &__detail {
+    padding: 6px 10px;
+    background: #FAFAFA;
+    font-size: 14px;
+    line-height: 21px;
+    color: #4F4F4F;
+    margin-bottom: 16px;
+    width: max-content;
+    @include sm {
+      padding: 4px 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 150%;
+    color: #000000;
+    margin-bottom: 24px;
+    max-width: 452px;
+    display: table;
+    @include lg {
+      font-size: 22px;
+    }
+    @include md {
+      font-size: 20px;
+      line-height: 29px;
+      margin-bottom: 0;
+      max-width: none;
+    }
+
+    &:hover {
+      color: $hover;
+    }
+  }
+
+  &__btn {
+    font-size: 14px;
+    line-height: 12px;
+    text-align: center;
+    color: #CB0D58;
+    @include md {
+      display: none;
+    }
+
+    &:hover {
+      color: $black;
+    }
+  }
+
+  &__start {
+    font-size: 14px;
+    line-height: 21px;
+    margin-bottom: 21px;
+    @include md {
+      margin-bottom: 0;
+    }
+  }
+
+  &__req {
+    font-size: 14px;
+    line-height: 21px;
+    color: #828282;
+    @include sm {
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 150%;
+    }
+  }
+
+}
+
+.spicer {
+
+  &__title {
+    @include sm {
+      font-size: 20px;
+    }
+  }
+
+  &__col {
+
+    &_1 {
+      @include md {
+        margin-bottom: 32px;
+      }
+      @include sm {
+        margin-bottom: 16px;
+      }
+    }
+
+    &_2 {
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+  }
+
+  &__desc {
+    border-bottom: 1px solid #E0E0E0;
+    margin-bottom: 40px;
+    padding-bottom: 48px;
+
+
+    @include lg {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+    }
+    @include md {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    p {
+      @include sm {
+        margin-bottom: 16px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__soc {
+    @include df;
+    @include fww;
+    @include aic;
+    margin: -16px;
+
+    @include md {
+      justify-content: flex-end;
+    }
+
+    &Link {
+      width: 32px;
+      height: 32px;
+      @include df;
+      @include jcc;
+      @include aic;
+      margin: 16px;
+
+      &:hover {
+        color: $hover;
+
+        path {
+          stroke: $hover;
+        }
+      }
+    }
+
+    &Ic {
+      flex-shrink: 0;
+
+      path {
+        @include tr;
+      }
+    }
+  }
+}
+
+.bRed {
+  background: $red;
+  padding: 112px 0;
+
+  @include md {
+    padding: 80px 0;
+  }
+
+  @include sm {
+    padding: 56px 0;
+  }
+
+  &__w{
+    @include md{
+      padding: 44px 0 32px;
+      border-top: 1px solid #E0E0E0;
+      border-bottom: 1px solid #E0E0E0;
+    }
+  }
+
+  &__col {
+    &_1 {
+      color: #fff;
+    }
+
+  }
+
+  &__item {
+  }
+
+  &__desc {
+    margin-bottom: 104px;
+    @include md{
+      margin-bottom: 32px;
+    }
+  }
+
+  &__form{
+    @include md{
+      margin-bottom: 32px;
+    }
+  }
+}
+
+.tex {
+
+  &__title {
+    color: #FFFFFF;
+    margin-bottom: 36px;
+    @include sm{
+      margin-bottom: 24px;
+    }
+  }
+
+
+}
+
+.bContact {
+  color: #FFFFFF;
+
+  &__b {
+    display: flex;
+
+    &:not(:last-child) {
+      margin-bottom: 26px;
+      @include sm{
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  &__pic {
+    width: 70px;
+    padding-right: 15px;
+    @include sm{
+      width: 30px;
+      padding-right: 10px;
+    }
+  }
+
+  &__ic {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  &__rt {
+
+  }
+
+  &__link {
+    font-size: 16px;
+    line-height: 24px;
+    display: table;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      color: $black;
+    }
+  }
+}
+
+.spicers {
+  @include row();
+  margin-bottom: -24px;
+
+  @include xl {
+
+  }
+  @include lg {
+
+  }
+  @include md {
+
+  }
+  @include sm {
+    @include row(15px);
+  }
+
+  &__title {
+    @include sm {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  &__item {
+    @include col(2);
+    margin-bottom: 24px;
+
+    @include xl {
+
+    }
+    @include lg {
+
+    }
+    @include md {
+      @include col(4);
+
+    }
+    @include sm {
+      @include col(4, p, 15px);
+    }
+  }
+
+  &__pic {
+    height: 419px;
+    margin-bottom: 12px;
+
+    @include xl {
+
+    }
+
+    @include lg {
+      height: 320px;
+    }
+
+    @include md {
+      height: 419px;
+    }
+
+    @include sm {
+      height: 220px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  &__desc {
+    font-size: 14px;
+    line-height: 160%;
+    padding-bottom: 24px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #E0E0E0;
+
+    @include xl {
+
+    }
+    @include lg {
+
+    }
+    @include md {
+
+    }
+    @include sm {
+      font-size: 10px;
+      line-height: 15px;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font: inherit;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__soc {
+    @include df;
+    @include fww;
+    @include aic;
+    margin: -12px;
+
+    &Link {
+      width: 24px;
+      height: 24px;
+      @include df;
+      @include jcc;
+      @include aic;
+      margin: 12px;
+
+      &:hover {
+        color: $hover;
+
+        path {
+          stroke: $hover;
+        }
+      }
+    }
+
+    &Ic {
+      flex-shrink: 0;
+
+      path {
+        @include tr;
+      }
+    }
+  }
+}
+
+.pEvProg {
+  @include md {
+    flex-direction: column-reverse;
+  }
+
+  &__side {
+    @include md {
+      margin-top: 42px;
+    }
+  }
+
+  &__dateB {
+    @include md {
+      margin: 0 auto;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

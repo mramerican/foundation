@@ -62,10 +62,10 @@ if ($cats) {
 
             <div class="pAbB row">
               <?php $bnew = get_sub_field('about')['d'] ?>
-
+				
               <div class="pAbB__col pAbB__col_1 c4 c8-md">
                 <h2 class="pAbTop__title title64" data-an="_fadeUp20"><?= get_sub_field('about')['t']; ?></h2>
-
+				  
                 <?php
                 if ($img = get_sub_field('about')['img']) {
                   $imgId = attachment_url_to_postid($img);
@@ -75,7 +75,7 @@ if ($cats) {
                 <?php if ($img_link): ?><a href="<?= $img_link ?>"><?php endif; ?>
                 <img data-src="<?= kama_thumb_src('w=656 &h=458 &crop=top', $img ? : get_bloginfo("template_directory") . '/img/pProgram1.jpg') ?>" alt="Parimatch Foundation - <?= $alt ?>" class="imgBorder mdHide imgSizeK" data-an="_imgR2L" width="656" height="458">
                 <?php if ($img_link): ?></a><?php endif; ?>
-
+				  
                 <?php if ($bnew): ?>
                   <div class="pAbTop__desc desc desc_660 mdHide" data-an="_fadeUp20"><?= $bnew ?></div>
                 <?php endif; ?>
@@ -83,7 +83,7 @@ if ($cats) {
 
               <div class="pAbB__col pAbB__col_2 pAbB__col_pt0 c3 c8-md">
                 <div class="desc" data-an="_fadeUp20"><?= get_sub_field('about')['d1']; ?></div>
-
+				  
                 <?php
                 if ($img = get_sub_field('about')['img']) {
                   $imgId = attachment_url_to_postid($img);
@@ -92,9 +92,9 @@ if ($cats) {
                 <?php if ($img_link): ?><a href="<?= $img_link ?>"><?php endif; ?>
                 <img data-src="<?= kama_thumb_src('w=656 &h=458 &crop=top', $img ? : get_bloginfo("template_directory") . '/img/pProgram1.jpg') ?>" alt="Parimatch Foundation - <?= $alt ?>" class="imgBorder mdShow imgSizeK" data-an="_imgR2L" width="656" height="458">
                 <?php if ($img_link): ?></a><?php endif; ?>
-
+				  
                 <div class="pAbB__txt txt txt_320" data-an="_fadeUp20"><?= get_sub_field('about')['d2']; ?></div>
-
+				  
                 <?php
                 if ($img = get_sub_field('about')['img1']) {
                   $imgId = attachment_url_to_postid($img);
@@ -104,7 +104,7 @@ if ($cats) {
                 <?php if ($img1_link): ?><a href="<?= $img1_link ?>"><?php endif; ?>
                 <img data-src="<?= kama_thumb_src('w=487 &h=320 &crop=top', $img ? : get_bloginfo("template_directory") . '/img/pProgram2.jpg') ?>" alt="Parimatch Foundation - <?= $alt ?>" class="pAbB__img imgSizeK" data-an="_imgL2R" width="487" height="320">
                 <?php if ($img1_link): ?></a><?php endif; ?>
-
+				  
                 <?php if ($bnew): ?>
                   <div class="pAbTop__desc desc desc_660 mdShow" data-an="_fadeUp20"><?= $bnew ?></div>
                 <?php endif; ?>

@@ -100,7 +100,7 @@ function insertDonateBtnWithContent()
 
     $insertBtn = '<a href="'.$url.'" '.$target.' class="btn-red content-btn">'.$title.'</a>';
 
-    $content = str_replace('{{donateBtn}}', $insertBtn, $content);
+    $content = str_replace('{{donateBnt}}', $insertBtn, $content);
   }
 
   return $content;

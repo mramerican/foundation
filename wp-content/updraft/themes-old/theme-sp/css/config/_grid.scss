@@ -1,0 +1,421 @@
+$offsetContainer: 24px;
+$offset: 20px;
+$offset_one_side: ($offset / 2);
+$columns: 8;
+$atom: (100% / $columns);
+
+$container: container;
+$containet_padding: 0 ($offsetContainer / 2);
+
+$break_xxl_container: 1356px;
+
+$break_xl: 1355px;
+$break_xl_container: 1260px;
+
+$break_lg: 1279px;
+$break_lg_container: 1004px;
+
+$break_md: 1023px;
+$break_md_container: 768px;
+
+$break_sm: 767px;
+$break_sm_container: 100%;
+
+$break_xs: 413px;
+$break_xs_container: 100%;
+
+$break_xxs: 374px;
+$break_xxs_container: 100%;
+
+@mixin row-offsets($size) {
+  margin-left: ($size * -1);
+  margin-right: ($size * -1);
+}
+
+@mixin col-offsets($type) {
+  #{$type}-left: $offset_one_side;
+  #{$type}-right: $offset_one_side;
+}
+
+@mixin row($size:$offset) {
+  @include df;
+  @include fww;
+  @if ($size > 0) {
+    @include row-offsets($size / 2);
+  }
+}
+
+@mixin col($n, $offsetType:padding, $num:null) {
+  @include fls;
+  $val: $atom * $n;
+  @if ($offsetType == 0) {
+    width: #{$val};
+  } @else if ($offsetType == padding) {
+    width: #{$val};
+    @if ($num != null) {
+      padding-left: $num / 2;
+      padding-right: $num / 2;
+    } @else {
+      @include col-offsets(padding);
+    }
+  } @else if ($offsetType == p) {
+    width: #{$val};
+    @if ($num != null) {
+      padding-left: $num / 2;
+      padding-right: $num / 2;
+    } @else {
+      @include col-offsets(padding);
+    }
+  } @else {
+    @if ($num != null) {
+      width: calc(#{$val} - #{$num});
+      margin-left: $num / 2;
+      margin-right: $num / 2;
+    } @else {
+      width: calc(#{$val} - #{$offset});
+      @include col-offsets(margin);
+    }
+  }
+}
+
+@mixin col-pl($n:1,$dop:null) {
+  $val: $atom * $n;
+  @if ($dop != null) {
+    padding-left: calc(#{$val} + #{$dop});
+  } @else {
+    padding-left: $val;
+  }
+}
+
+@mixin col-pr($n:1,$dop:null) {
+  $val: $atom * $n;
+  @if ($dop != null) {
+    padding-right: calc(#{$val} + #{$dop});
+  } @else {
+    padding-right: $val;
+  }
+}
+
+@mixin col-ml($n:1,$dop:null) {
+  $val: $atom * $n;
+  @if ($dop != null) {
+    margin-left: calc(#{$val} + #{$dop});
+  } @else {
+    margin-left: $val;
+  }
+}
+
+@mixin col-mr($n:1,$dop:null) {
+  $val: $atom * $n;
+  @if ($dop != null) {
+    margin-right: calc(#{$val} + #{$dop});
+  } @else {
+    margin-right: $val;
+  }
+}
+
+.#{$container} {
+  margin: 0 auto;
+  display: block;
+  padding: $containet_padding;
+  position: relative;
+  width: $break_xxl_container;
+  max-width: 100%;
+
+  @include xl {
+    width: $break_xl_container;
+  }
+  @include lg {
+    width: $break_lg_container;
+  }
+  @include md {
+    width: $break_md_container;
+  }
+  @include sm {
+    width: $break_sm_container;
+  }
+  @include xs {
+    width: $break_xs_container;
+  }
+}
+
+.box {
+  @include df;
+  @include fww;
+  width: $break_xxl_container;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include xl {
+    width: $break_xl_container;
+  }
+  @include lg {
+    width: $break_lg_container;
+  }
+  @include md {
+    width: $break_md_container;
+  }
+  @include sm {
+    width: $break_sm_container;
+  }
+  @include xs {
+    width: $break_xs_container;
+  }
+}
+
+.row {
+  @include row();
+  @include acfs;
+  @include aifs;
+}
+
+.cM {
+  @include col-offsets(margin);
+}
+.cP {
+  @include col-offsets(padding);
+}
+
+@for $i from 1 through $columns {
+  .c#{$i} {
+    @include col($i, m);
+  }
+  .c#{$i}P {
+    @include col($i, padding);
+  }
+  .c#{$i}N {
+    @include col($i, 0);
+  }
+  .c#{$i}Row {
+    @include col($i, 0);
+    @include df;
+    @include fww;
+  }
+}
+
+@include xl {
+  @for $i from 1 through $columns {
+    .c#{$i}-xl {
+      @include col($i, m);
+    }
+    .c#{$i}p-xl {
+      @include col($i, padding);
+    }
+    .c#{$i}n-xl {
+      @include col($i, 0);
+    }
+    .c#{$i}-xl-row {
+      @include col($i, 0);
+      @include df;
+      @include fww;
+    }
+  }
+}
+
+@include lg {
+  @for $i from 1 through $columns {
+    .c#{$i}-lg {
+      @include col($i, m);
+    }
+    .c#{$i}p-lg {
+      @include col($i, padding);
+    }
+    .c#{$i}n-lg {
+      @include col($i, 0);
+    }
+    .c#{$i}-lg-row {
+      @include col($i, 0);
+      @include df;
+      @include fww;
+    }
+  }
+}
+
+@include md {
+  @for $i from 1 through $columns {
+    .c#{$i}-md {
+      @include col($i, m);
+    }
+    .c#{$i}p-md {
+      @include col($i, padding);
+    }
+    .c#{$i}n-md {
+      @include col($i, 0);
+    }
+    .c#{$i}-md-row {
+      @include col($i, 0);
+      @include df;
+      @include fww;
+    }
+  }
+}
+
+@include sm {
+  @for $i from 1 through $columns {
+    .c#{$i}-sm {
+      @include col($i, m);
+    }
+    .c#{$i}p-sm {
+      @include col($i, padding);
+    }
+    .c#{$i}n-sm {
+      @include col($i, 0);
+    }
+    .c#{$i}-sm-row {
+      @include col($i, 0);
+      @include df;
+      @include fww;
+    }
+  }
+}
+
+@include xs {
+  @for $i from 1 through $columns {
+    .c#{$i}-xs {
+      @include col($i, m);
+    }
+    .c#{$i}p-xs {
+      @include col($i, padding);
+    }
+    .c#{$i}n-xs {
+      @include col($i, 0);
+    }
+    .c#{$i}-xs-row {
+      @include col($i, 0);
+      @include df;
+      @include fww;
+    }
+  }
+}
+
+.df {
+  @include df;
+}
+
+.fdr {
+  @include fdr;
+}
+
+.fdrr {
+  @include fdrr;
+}
+
+.fdc {
+  @include fdc;
+}
+
+.fdcr {
+  @include fdcr;
+}
+
+.fww {
+  @include fww;
+}
+
+.fwwr {
+  @include fwwr;
+}
+
+.jcc {
+  @include jcc;
+}
+
+.jcfe {
+  @include jcfe;
+}
+
+.jcfs {
+  @include jcfs;
+}
+
+.jcsa {
+  @include jcsa;
+}
+
+.jcsb {
+  @include jcsb;
+}
+
+.aib {
+  @include aib;
+}
+
+.aic {
+  @include aic;
+}
+
+.aife {
+  @include aife;
+}
+
+.aifs {
+  @include aifs;
+}
+
+.ais {
+  @include ais;
+}
+
+.acc {
+  @include acc;
+}
+
+.acfe {
+  @include acfe;
+}
+
+.acfs {
+  @include acfs;
+}
+
+.acsa {
+  @include acsa;
+}
+
+.acsb {
+  @include acsb;
+}
+
+.acs {
+  @include acs;
+}
+
+.asa {
+  @include asa;
+}
+
+.asb {
+  @include asb;
+}
+
+.asc {
+  @include asc;
+}
+
+.asfe {
+  @include asfe;
+}
+
+.asfs {
+  @include asfs;
+}
+
+.ass {
+  @include ass;
+}
+
+.fl {
+  @include fl;
+}
+
+.flg {
+  @include flg;
+}
+
+.fls {
+  @include fls;
+}
+
+.flb {
+  @include flb;
+}

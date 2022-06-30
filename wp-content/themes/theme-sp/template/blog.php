@@ -1,6 +1,7 @@
 <?php $cat = get_field('blog_cat');
 if ($cat) { ?>
   <div class="bBlog__row">
+
     <div class="bNews">
       <?php $the_query = new WP_Query( 'posts_per_page=3' ); ?>
       <?php while ($the_query -> have_posts()) : $the_query -> the_post(); ?>

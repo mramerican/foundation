@@ -1,0 +1,508 @@
+.cursor {
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  background: #CB0D58;
+  opacity: 0.3;
+  border-radius: 50%;
+  @include tXY;
+  position: fixed;
+  left: -300px;
+  top: 0;
+  z-index: 999999;
+  pointer-events: none;
+  will-change: transform;
+  transition: 0.3s width, 0.3s height;
+  @include md {
+    display: none;
+  }
+
+  &.cursorMore {
+    width: 48px;
+    height: 48px;
+    opacity: 0.7;
+  }
+
+  &._drag {
+    width: 48px;
+    height: 48px;
+    opacity: 1;
+    background-color: transparent;
+    border: 1px solid #fff;
+
+    &:before {
+      @include tr;
+      content: '';
+      position: absolute;
+      z-index: 2;
+      left: -12px;
+      top: 50%;
+      margin-top: -4px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-right: 5px solid #fff;
+    }
+
+    &:after {
+      @include tr;
+      content: '';
+      position: absolute;
+      z-index: 2;
+      right: -12px;
+      top: 50%;
+      margin-top: -4px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 5px solid #fff;
+    }
+
+    .cursor__logo {
+      opacity: 1;
+    }
+
+  }
+
+  &._dragBlack {
+    width: 48px;
+    height: 48px;
+    opacity: 1;
+    background-color: transparent;
+    border: 1px solid $black;
+
+    &:before {
+      @include tr;
+      content: '';
+      position: absolute;
+      z-index: 2;
+      left: -12px;
+      top: 50%;
+      margin-top: -4px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-right: 5px solid $black;
+    }
+
+    &:after {
+      @include tr;
+      content: '';
+      position: absolute;
+      z-index: 2;
+      right: -12px;
+      top: 50%;
+      margin-top: -4px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 5px solid $black;
+    }
+
+    .cursor__logo {
+      opacity: 1;
+
+      path {
+        fill: $black;
+      }
+    }
+
+  }
+
+  &._hide {
+    //opacity: 0;
+  }
+
+  &__slider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include tXY;
+    font-size: 0;
+  }
+
+  &__logo {
+    display: block;
+    opacity: 0;
+  }
+
+
+}
+
+.b-breadcrumb {
+  margin-bottom: 32px;
+}
+
+.breadcrumb {
+  @include df;
+  @include fww;
+  @include aic;
+  margin-right: -20px;
+  margin-bottom: -10px;
+
+  &._white {
+    .breadcrumb__item {
+      &:not(:hover) {
+        color: $grey3;
+      }
+    }
+
+    .breadcrumb__cur {
+      color: #fff;
+    }
+
+  }
+
+  &__item {
+    margin-right: 20px;
+    font-size: 11px;
+    line-height: 16px;
+    color: #828282;
+
+    &:hover {
+      a {
+        color: $hover;
+      }
+    }
+
+    &:not(:last-child) {
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        margin-top: -6px;
+        left: 100%;
+        height: 12px;
+        margin-left: 10px;
+        border-left: 1px solid #828282;
+      }
+    }
+  }
+
+  &__cur {
+    color: $black;
+  }
+}
+
+.imgBorder {
+  border: 32px solid #FAFAFA;
+  display: block;
+  @include md {
+    border: none;
+    margin-left: -12px;
+    max-width: none;
+    width: calc(100% + 24px);
+  }
+}
+
+.block {
+  overflow: hidden;
+
+  &_mb {
+    margin-bottom: 104px;
+
+    @include md {
+      margin-bottom: 80px;
+    }
+    @include sm {
+      margin-bottom: 56px;
+    }
+  }
+
+  &__col {
+
+    &_1 {
+    }
+
+    &_2 {
+    }
+  }
+
+  &__desc {
+    margin-bottom: 40px;
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    @include sm {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__txt {
+    margin-bottom: 64px;
+
+    @include md {
+      margin-bottom: 48px;
+    }
+
+    @include sm {
+      margin-bottom: 32px;
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.share {
+  @include df;
+  @include fww;
+  @include aic;
+  margin: -6px;
+
+  &__link {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #E0E0E0;
+    @include df;
+    @include jcc;
+    @include aic;
+    margin: 6px;
+    border-radius: 50%;
+
+    @include sm {
+      width: 48px;
+      height: 48px;
+    }
+
+    &:hover {
+      color: $hover;
+      border-color: $hover;
+
+      path {
+        stroke: $hover;
+      }
+    }
+  }
+
+  &__ic {
+    flex-shrink: 0;
+
+    path {
+      @include tr;
+    }
+  }
+}
+
+.mdHide {
+  @include md {
+    display: none !important;
+  }
+}
+
+.mdShow {
+  @include mdm {
+    display: none !important;
+  }
+}
+
+.smHide {
+  @include sm {
+    display: none !important;
+  }
+}
+
+.smShow {
+  @include smm {
+    display: none !important;
+  }
+}
+
+.bNext {
+  background-image: url("../img/bNext.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    @include tr;
+  }
+
+  &__row {
+    min-height: 400px;
+    padding: 56px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #fff;
+    @include md{
+      min-height: 300px;
+      padding: 32px 0 40px;
+    }
+    @include sm{
+      min-height: auto;
+    }
+  }
+
+  &__untitle {
+    font-size: 14px;
+    line-height: 125%;
+    color: #FFFFFF;
+    width: 100%;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #FFFFFF;
+    @include sm{
+      margin-bottom: 28px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 56px;
+    line-height: 1;
+    color: #fff;
+    @include sm{
+      margin-bottom: 40px;
+    }
+  }
+
+  &__link {
+    margin-top: auto;
+    font-size: 14px;
+    line-height: 1;
+    text-decoration-line: underline;
+    &:hover{
+      color: $hover;
+    }
+  }
+}
+
+.videoYou {
+  position: relative;
+  margin-top: 104px;
+
+  @include xl{
+    margin-top: 86px;
+  }
+
+  @include lg{
+    margin-top: 76px;
+  }
+
+  @include md{
+    margin-top: 66px;
+  }
+
+  @include sm{
+    margin-top: 56px;
+  }
+
+  &__top{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    &-t{
+      font-size: 14px;
+      line-height: 21px;
+      color: #000000;
+      margin-right: 24px;
+    }
+    &-rt{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: 15px;
+      @include sm{
+        margin-top: 30px;
+        margin-left: 0;
+      }
+    }
+    &-btn{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-left: -8px;
+      margin-top: -8px;
+      a{
+        min-width: 75px;
+        margin-left: 8px;
+        margin-top: 8px;
+      }
+    }
+  }
+  &__b{
+
+  }
+
+  &__video {
+    position: relative;
+    height: 720px;
+    width: 100%;
+    @include lg{
+      height: 550px;
+    }
+    @include md{
+      height: 420px;
+    }
+    @include sm{
+      height: 260px;
+    }
+  }
+}
+
+.seo {
+  margin: 48px 0 70px;
+  &__row{
+    display: flex;
+    justify-content: flex-end;
+  }
+ 
+  &__b {
+    @include col(5, 0);
+
+    @include md{
+      @include col(8, 0);
+    }
+
+  }
+
+  &__desc {
+    max-width: 825px;
+    overflow: hidden;
+    @include tr;
+    &:not(._active){
+      max-height: 258px!important;
+      @include md{
+        max-height: 220px !important;
+      }
+      @include sm{
+        max-height: 214px !important;
+      }
+    }
+    > *:last-child{
+      margin-bottom: 0;
+    }
+  }
+  &__btn{
+    margin-top: 22px;
+  }
+}
+
+.imgSize{
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.imgSizeK{
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}

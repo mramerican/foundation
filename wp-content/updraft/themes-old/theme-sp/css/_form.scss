@@ -1,0 +1,533 @@
+input, textarea, button {
+  font-family: inherit;
+  text-decoration: none;
+  outline: none !important;
+  box-shadow: none;
+
+  &:active, &:hover, &:visited, &:checked, &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @include placeholder;
+}
+
+input:not([type=checkbox]):not([type=radio]),
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+*[tabindex] {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  @include tr;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+
+  &:active, &:hover, &:visited, &:checked, &:focus {
+    &::-moz-focus-inner {
+      border: 0;
+    }
+  }
+}
+
+.bForm {
+  padding: 48px 40px;
+  background: #fff;
+  border-radius: 4px;
+
+  @include sm{
+    padding: 20px 16px 58px;
+  }
+}
+
+.form {
+  color: $black;
+
+  &__head {
+    margin-bottom: 40px;
+    @include sm{
+      margin-bottom: 32px;
+    }
+  }
+
+  &__title {
+  }
+
+  &__group {
+    position: relative;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &_textarea{
+      .form__error{
+        //bottom: 50%;
+      }
+    }
+
+    &_btn {
+      margin-top: 40px;
+      @include sm{
+        margin-top: 24px;
+      }
+    }
+  }
+
+  &__group-box {
+    position: relative;
+  }
+
+  &__error {
+    font-size: 12px;
+    line-height: 18px;
+    color: $red;
+    text-align: right;
+    bottom: 18px;
+    right: 16px;
+    position: absolute;
+    margin: 0;
+  }
+
+  &__label {
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2px;
+  }
+
+  &__name {
+
+  }
+  &__note{
+    color: #BDBDBD;
+  }
+
+  &__input, &__textarea {
+    display: block;
+    position: relative;
+    transition: color, border-color 0.3s;
+    -webkit-transition: color, border-color 0.3s;
+    text-align: left;
+    box-shadow: none;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    padding: 5px 20px;
+    color: $red;
+    font-size: 16px;
+    text-shadow: none;
+    @include placeholder(#828282);
+
+    @include sm{
+      padding-left: 16px;
+    }
+
+    &._error {
+      color: $red;
+      border-color: $red;
+      @include placeholder($red);
+    }
+
+    &:focus {
+      @include placeholder(transparent);
+      border-color: $focus;
+    }
+  }
+
+  &__input {
+    height: 56px;
+    line-height: 1;
+  }
+
+  &__textarea {
+    height: 152px;
+    padding: 17px 20px;
+    line-height: 1.5;
+
+    @include sm{
+      padding-left: 16px;
+    }
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    &_pevent{
+      @include lg{
+        flex-direction: column;
+        .form__policy{
+          max-width: none;
+          margin-left: 0;
+          margin-top: 16px;
+        }
+      }
+    }
+    @include sm{
+      flex-direction: column;
+    }
+  }
+
+  &__btn {
+    flex-shrink: 0;
+  }
+
+  &__policy {
+    margin-left: 40px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #828282;
+    max-width: 331px;
+    @include sm{
+      max-width: none;
+      margin-left: 0;
+      margin-top: 16px;
+    }
+
+    a {
+      display: inline;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+
+
+  &__share {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #E0E0E0;
+
+    @include sm{
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+    }
+  }
+}
+
+.b-select {
+  display: table;
+  width: 100%;
+  &._selected{
+    .b-select__title{
+      color: $hover;
+    }
+  }
+
+  &__wr {
+    position: relative;
+    display: block;
+    overflow: hidden;
+
+    &.active {
+      overflow: initial;
+
+      .b-select__title {
+        &:after {
+          transform: rotate(-180deg);
+        }
+      }
+
+      .b-select__list {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__input {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    position: absolute;
+  }
+
+  &__title {
+    position: relative;
+    text-align: left;
+    width: 100%;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #fff;
+    min-height: 56px;
+    padding: 2px 40px 2px 20px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #828282;
+    overflow: hidden;
+    cursor: pointer;
+    @include df;
+    @include aic;
+    transition: border 0.4s ease-out;
+    &:hover{
+      border-color: $focus;
+    }
+
+    &._error {
+      color: $red;
+      border-color: $red;
+    }
+
+    &:after{
+      @include tr;
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      margin-top: -3px;
+      right: 25px;
+      border-left: 5.5px solid transparent;
+      border-right: 5.5px solid transparent;
+      border-top: 6px solid $hover;
+    }
+  }
+
+  &__list {
+    @include tr;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    padding: 4px 20px 17px;
+    max-height: 375px;
+    overflow: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    &:before{
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      left: 0;
+      right: 0;
+      top: 4px;
+      bottom: 0;
+      background: #FFFFFF;
+      border-radius: 4px;
+      border: 1px solid #E0E0E0;
+      z-index: -1;
+    }
+
+    &::-webkit-scrollbar-button {
+      height: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $hover;
+    }
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+  }
+
+  &__item {
+    @include tr;
+    padding: 17px 0 15px;
+    border-bottom: 1px solid #E0E0E0;
+    font-size: 16px;
+    line-height: 24px;
+    color: $black;
+    display: block;
+
+    &:hover, &.active {
+      color: $hover;
+    }
+  }
+
+  .form__error{
+    right: 48px;
+  }
+}
+
+.formSearch {
+  display: flex;
+  width: max-content;
+  position: relative;
+
+  &__input {
+    font-size: 20px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background-color: transparent;
+    @include placeholder(#fff);
+    width: 120px;
+    flex-shrink: 0;
+
+
+    @include lg{
+      //font-size: 18px;
+      //line-height: 1.2;
+    }
+
+    &._error {
+      /*border-color: $red;
+      @include placeholder($red);*/
+    }
+  }
+
+  &__btn {
+    width: 16px;
+    min-height: 20px;
+    @include df;
+    @include jcc;
+    @include aic;
+    flex-shrink: 0;
+    margin-right: 4px;
+  }
+
+  &__ic {
+    path {
+      @include tr;
+    }
+
+    &:hover {
+      path {
+        fill: $red;
+      }
+    }
+  }
+
+  .form__error {
+    position: absolute;
+    left: 20px;
+    top: 100%;
+    margin-left: 0;
+  }
+}
+
+.b-file {
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  position: relative;
+  @include df;
+  @include aic;
+  padding: 5px 70px 5px 20px;
+  cursor: pointer;
+  background-color: #fff;
+  background-image: url("../img/utach.svg");
+  background-repeat: no-repeat;
+  background-position: right 22px center;
+  transition: border 0.4s ease-out;
+  &:hover{
+    border-color: $focus;
+  }
+
+  &.dragover {
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: $hover;
+      opacity: 0.2;
+    }
+  }
+
+  &__wr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .b-file__remove {
+      position: relative;
+      margin-right: 12px;
+      right: auto;
+      top: auto;
+      margin-top: 0;
+    }
+  }
+
+  &.selectedFile {
+    background-image: none;
+
+    .b-file__txt{
+      color: $hover;
+    }
+
+    .b-file__remove {
+      visibility: visible;
+      opacity: 1;
+      z-index: 9;
+      display: block;
+    }
+  }
+
+  &._error {
+    border-color: $red;
+
+    .b-file__txt{
+      color: $red;
+    }
+  }
+
+  &__input {
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  &__txt {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #828282;
+  }
+
+  &__remove {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    margin-top: -8px;
+    width: 16px;
+    height: 16px;
+    display: none;
+
+    path {
+      @include tr;
+    }
+
+    &:hover {
+      path {
+        stroke: $black;
+      }
+    }
+  }
+
+  .form__error{
+    right: 48px;
+  }
+}
+
