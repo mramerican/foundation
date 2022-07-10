@@ -81,7 +81,84 @@
     width: auto;
     .popup__content{
       padding: 0;
+    }
+  }
+  &.popupHelpUkraineChildren {
+    .title {
+      font-family: $font2;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 36px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 43px;
+    }
 
+    .description {
+      font-family: $font2;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 21px;
+      color: #FFFFFF;
+      margin-bottom: 42px;
+    }
+
+    .btn-red {
+      font-family: $font2;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 21px;
+      color: #FFFFFF;
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+      text-transform: uppercase;
+
+      width: 190px;
+      height: 58px;
+      padding-bottom: 18px;
+
+      border-radius: 10px;
+
+      &:before, &:after {
+        border-radius: 10px;
+      }
+    }
+
+    .popup__wrapper {
+      background-image: url("../img/popupHelpUkraineChildren/logo.png");
+      background-repeat: no-repeat;
+      background-position: right 55px bottom 43px;
+    }
+
+    .popup__content {
+      max-width: 363px;
+    }
+
+    .popup__close {
+      path {
+        stroke: #fff;
+      }
+    }
+
+    background: url("../img/popupHelpUkraineChildren/bg_big.png") no-repeat top right;
+    max-width: 1140px;
+
+    @media (max-width: 578px) {
+      .popup__wrapper {
+        background-position: right 5px bottom 35px;
+      }
+
+      .btn-red {
+        font-size: 23px;
+        width: 170px;
+      }
+
+      background: url("../img/popupHelpUkraineChildren/bg_small.png") no-repeat top right;
     }
   }
 }

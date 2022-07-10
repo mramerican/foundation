@@ -31,7 +31,6 @@ if ($cats) {
         btnReg.forEach(btn => {
           btn.addEventListener('click', () => {
             fbq('trackCustom', 'konf_form_click');
-            console.log("trackCustom");
           });
         });
       }
@@ -40,14 +39,12 @@ if ($cats) {
       if (btnSubCus) {
         btnSubCus.forEach(btn => {
           btn.addEventListener('click', () => {
-            console.log("submit click");
             let formBl = btn.closest('form');
             if (!formBl) return;
             setTimeout(function () {
               let formErr = formBl.querySelector('.sp-invalid');
               if (!formErr) {
                 fbq('track', 'Lead');
-                console.log('fbq');
               }
             }, 400);
           });

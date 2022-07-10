@@ -99,3 +99,46 @@
     </div>
   </div>
 </div>
+
+<!--popup help for children of Ukraine-->
+<?php if ($popUp = get_field('popup_help_ua_ch', 'options')): ?>
+<div class="popup popupHelpUkraineChildren" data-popup="popupHelpUkraineChildren">
+  <div class="popup__wrapper">
+    <div class="popup__content">
+      <div class="title"><?= $popUp['title'] ?></div>
+      <div class="description"><?= $popUp['desc'] ?></div>
+      <?php if ($btn = get_field('h_btn', 'options')):
+        $url = $btn['url'] ?: '#';
+        $title = $popUp['btn'] ?: 'link';
+        $target = $btn['target'] ? ' target="_blank"' : '';
+        ?>
+        <a href="<?= $url ?>"<?= $target ?> class="btn-red"><?= $title ?></a>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const isOpenPopup = sessionStorage.getItem('popupHelpUkraineChildren');
+
+    if (!isOpenPopup) {
+      let _modalLinkCreate = document.createElement('a');
+      _modalLinkCreate.dataset.modal = "popupHelpUkraineChildren";
+      _modalLinkCreate.style.display = 'none';
+      document.body.appendChild(_modalLinkCreate);
+
+      setTimeout(() => {
+        _modalLinkCreate.click();
+        document.body.removeChild(_modalLinkCreate);
+
+        sessionStorage.setItem('popupHelpUkraineChildren', 1);
+      }, 5000);
+
+      $('.popupHelpUkraineChildren .btn-red').on('click', function(){
+        $.fancybox.close();
+      });
+    }
+  });
+</script>
+<?php endif; ?>

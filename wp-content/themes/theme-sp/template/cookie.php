@@ -1,5 +1,4 @@
-<?php
-if (!isset($_COOKIE['cookiePopupClose'])): ?>
+<?php if (!isset($_COOKIE['cookiePopupClose'])): ?>
 
   <div class="pupup-cookie" data-an="_fadeIn" data-del="5">
     <div class="pupup-cookie__lt">
