@@ -85,7 +85,7 @@
   }
   &.popupHelpUkraineChildren {
     .title {
-      font-family: $font2;
+      font-family: $font3;
       font-style: italic;
       font-weight: 700;
       font-size: 36px;
@@ -96,7 +96,7 @@
     }
 
     .description {
-      font-family: $font2;
+      font-family: $font3;
       font-style: italic;
       font-weight: 400;
       font-size: 20px;
@@ -136,7 +136,7 @@
     }
 
     .popup__content {
-      max-width: 363px;
+      max-width: 375px;
     }
 
     .popup__close {
@@ -154,8 +154,8 @@
       }
 
       .btn-red {
-        font-size: 23px;
-        width: 170px;
+        font-size: 21px;
+        width: 145px;
       }
 
       background: url("../img/popupHelpUkraineChildren/bg_small.png") no-repeat top right;
@@ -163,8 +163,8 @@
 
     @media (max-width: 400px) {
       .btn-red {
-        font-size: 20px;
-        width: 130px;
+        font-size: 19px;
+        width: 120px;
         padding-bottom: 16px;
         padding-left: 20px;
         padding-right: 20px;

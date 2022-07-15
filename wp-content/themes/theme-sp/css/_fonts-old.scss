@@ -151,3 +151,45 @@
   font-style: normal;
   font-weight: 100;
 }
+
+@font-face {
+  font-family: "Gilroy";
+  font-display: swap;
+  src: url("../fonts/Gilroy-RegularItalic.eot");
+  /* IE9 */
+  src: url("../fonts/Gilroy-RegularItalic.eot?#iefix") format("embedded-opentype"),
+  url("../fonts/Gilroy-RegularItalic.woff") format("woff"),
+  url("../fonts/Gilroy-RegularItalic.woff2") format("woff2"),
+  url("../fonts/Gilroy-RegularItalic.ttf") format("truetype");
+  /* iOS 4.1- */
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-display: swap;
+  src: url("../fonts/Gilroy-BoldItalic.eot");
+  /* IE9 */
+  src: url("../fonts/Gilroy-BoldItalic.eot?#iefix") format("embedded-opentype"),
+  url("../fonts/Gilroy-BoldItalic.woff") format("woff"),
+  url("../fonts/Gilroy-BoldItalic.woff2") format("woff2"),
+  url("../fonts/Gilroy-BoldItalic.ttf") format("truetype");
+  /* iOS 4.1- */
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-display: swap;
+  src: url("../fonts/Gilroy-ExtraboldItalic.eot");
+  /* IE9 */
+  src: url("../fonts/Gilroy-ExtraboldItalic.eot?#iefix") format("embedded-opentype"),
+  url("../fonts/Gilroy-ExtraboldItalic.woff") format("woff"),
+  url("../fonts/Gilroy-ExtraboldItalic.woff2") format("woff2"),
+  url("../fonts/Gilroy-ExtraboldItalic.ttf") format("truetype");
+  /* iOS 4.1- */
+  font-style: italic;
+  font-weight: 800;
+}
