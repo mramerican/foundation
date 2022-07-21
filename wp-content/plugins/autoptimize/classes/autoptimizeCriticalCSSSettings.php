@@ -39,6 +39,11 @@ class autoptimizeCriticalCSSSettings {
             }
 
             $criticalcss_ajax = new autoptimizeCriticalCSSSettingsAjax();
+
+            // if debug logging is off but the file is present, then remove the debug log file.
+            if ( empty( $this->criticalcss->get_option( 'debug' ) ) && file_exists( AO_CCSS_LOG ) ) {
+                unlink( AO_CCSS_LOG );
+            }
         }
     }
 
@@ -70,7 +75,7 @@ class autoptimizeCriticalCSSSettings {
         register_setting( 'ao_ccss_options_group', 'autoptimize_ccss_unloadccss' );
 
         // And add submenu-page.
-        add_submenu_page( null, 'Critical CSS', 'Critical CSS', 'manage_options', 'ao_critcss', array( $this, 'ao_criticalcsssettings_page' ) );
+        add_submenu_page( '', 'Critical CSS', 'Critical CSS', 'manage_options', 'ao_critcss', array( $this, 'ao_criticalcsssettings_page' ) );
     }
 
     public function admin_assets( $hook ) {
@@ -114,6 +119,7 @@ class autoptimizeCriticalCSSSettings {
         $ao_css_defer_inline   = $this->criticalcss->get_option( 'css_defer_inline' );
         $ao_ccss_loggedin      = $this->criticalcss->get_option( 'loggedin' );
         $ao_ccss_forcepath     = $this->criticalcss->get_option( 'forcepath' );
+        $ao_ccss_domain        = $this->criticalcss->get_option( 'domain' );
         ?>
         <script>document.title = "Autoptimize: <?php _e( 'Critical CSS', 'autoptimize' ); ?> " + document.title;</script>
         <div class="wrap">
@@ -151,8 +157,7 @@ class autoptimizeCriticalCSSSettings {
                 }
 
                 // Check for "inline & defer CSS" being active in Autoptimize.
-                if ( ! empty( $ao_ccss_key ) && ! $ao_css_defer ) {
-                    if ( empty( $ao_ccss_keyst ) ) {
+                if ( ! empty( $ao_ccss_key ) && ! $ao_css_defer && empty( $ao_ccss_keyst ) ) {
                         // no keystate so likely in activation-process of CCSS, let's enable "inline & defer CSS" immediately to make things easier!
                         autoptimizeOptionWrapper::update_option( 'autoptimize_css_defer', 'on' );
                         ?>
@@ -162,16 +167,6 @@ class autoptimizeCriticalCSSSettings {
                         ?>
                         </p></div>
                         <?php
-                    } else {
-                        // we have keystate, so "inline & defer CSS" was probably disabled for troubleshooting, warn but let users continue.
-                        ?>
-                        <div class="notice-warning notice"><p>
-                        <?php
-                        _e( "Please <strong>activate the \"Eliminate render-blocking CSS\" option</strong> on Autoptimize's main settings page to ensure critical CSS is used on the front-end.", 'autoptimize' );
-                        ?>
-                        </p></div>
-                        <?php
-                    }
                 }
 
                 // check if WordPress cron is disabled and warn if so.
@@ -317,7 +312,7 @@ class autoptimizeCriticalCSSSettings {
                                 // Render rules section for manual rules.
                                 ao_ccss_render_rules();
                             } else {
-                                echo "<input class='hidden' name='autoptimize_ccss_queue' value='" . json_encode( $ao_ccss_rules, JSON_FORCE_OBJECT ) . "'>";
+                                echo "<input class='hidden' name='autoptimize_ccss_rules' value='" . json_encode( $ao_ccss_rules, JSON_FORCE_OBJECT ) . "'>";
                             }
 
                             // But if key is other than valid, add hidden fields to persist settings when submitting form
@@ -338,6 +333,7 @@ class autoptimizeCriticalCSSSettings {
                             echo '<input class="hidden" name="autoptimize_css_defer_inline" value="' . esc_attr( $ao_css_defer_inline ) . '">';
                             echo '<input class="hidden" name="autoptimize_ccss_loggedin" value="' . esc_attr( $ao_ccss_loggedin ). '">';
                             echo '<input class="hidden" name="autoptimize_ccss_forcepath" value="' . esc_attr( $ao_ccss_forcepath ) . '">';
+                            echo '<input class="hidden" name="autoptimize_ccss_domain" id="autoptimize_ccss_domain" value="' . esc_attr( $ao_ccss_domain ) . '">';
                         }
                         // Render key panel unconditionally.
                         ao_ccss_render_key( $ao_ccss_key, $key['status'], $key['stmsg'], $key['msg'], $key['color'] );
@@ -415,7 +411,7 @@ class autoptimizeCriticalCSSSettings {
         return $_has_auto_rules;
     }
 
-    public function is_multisite_network_admin() {
+    public static function is_multisite_network_admin() {
         static $_multisite_network_admin = null;
 
         if ( null === $_multisite_network_admin ) {

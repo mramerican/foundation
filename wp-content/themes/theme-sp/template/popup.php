@@ -102,7 +102,7 @@
 
 <!--popup help for children of Ukraine-->
 <?php if ($popUp = get_field('popup_help_ua_ch', 'options')): ?>
-<div class="popup popupHelpUkraineChildren" data-popup="popupHelpUkraineChildren">
+<div class="popup popupHelpUkraineChildren <?= pll_current_language() ?>" data-popup="popupHelpUkraineChildren">
   <div class="popup__wrapper">
     <div class="popup__content">
       <div class="title"><?= $popUp['title'] ?></div>

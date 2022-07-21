@@ -62,7 +62,7 @@ class autoptimizeConfig
             }
 
             $this->settings_screen_do_remote_http = apply_filters( 'autoptimize_settingsscreen_remotehttp', $this->settings_screen_do_remote_http );
-            
+
             if ( $this->is_ao_meta_settings_active() ) {
                 $metaBox = new autoptimizeMetabox();
             }
@@ -219,7 +219,7 @@ if ( is_network_admin() && autoptimizeOptionWrapper::is_ao_active_for_network() 
     </li>
 <?php } else { ?>
     <input type="hidden" id="autoptimize_enable_site_config" name="autoptimize_enable_site_config" value="on" />
-<?php } ?>    
+<?php } ?>
 
 <li class="itemDetail">
 <h2 class="itemTitle"><?php _e( 'JavaScript Options', 'autoptimize' ); ?></h2>
@@ -351,7 +351,7 @@ echo __( 'A comma-separated list of CSS you want to exclude from being optimized
 <?php if ( false === autoptimizeUtils::is_plugin_active( 'unusedcss/unusedcss.php' ) ) { ?>
 <tr valign="top">
 <th scope="row"><?php _e( 'Remove Unused CSS?', 'autoptimize' ); ?></th>
-<?php 
+<?php
 $_rapidload_link = 'https://misc.optimizingmatters.com/partners/?from=csssettings&partner=rapidload';
 ?>
 <td><?php echo sprintf( __( 'If Google Pagespeed Insights detects unused CSS, consider using %s to <strong>reduce your site\'s CSS size to up to 90&#37;</strong>, resulting in a slimmer, faster site!', 'autoptimize' ), '<a href="' . $_rapidload_link . '" target="_blank">the premium Rapidload service</a>' ); ?></td>
@@ -366,6 +366,11 @@ $_rapidload_link = 'https://misc.optimizingmatters.com/partners/?from=csssetting
 <tr valign="top">
 <th scope="row"><?php _e( 'Optimize HTML Code?', 'autoptimize' ); ?></th>
 <td><input type="checkbox" id="autoptimize_html" name="autoptimize_html" <?php echo $conf->get( 'autoptimize_html' ) ? 'checked="checked" ' : ''; ?>/></td>
+</tr>
+<tr class="html_sub" valign="top">
+<th scope="row"><?php _e( 'Also minify inline JS/ CSS?', 'autoptimize' ); ?></th>
+<td><label class="cb_label"><input type="checkbox" name="autoptimize_html_minify_inline" <?php echo $conf->get( 'autoptimize_html_minify_inline' ) ? 'checked="checked" ' : ''; ?>/>
+<?php _e( 'Enable this if you want inline JS or CSS to be minified as well.', 'autoptimize' ); ?></label></td>
 </tr>
 <tr class="html_sub" valign="top">
 <th scope="row"><?php _e( 'Keep HTML comments?', 'autoptimize' ); ?></th>
@@ -389,7 +394,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
 } else {
     $cdn_editable    = '';
     $cdn_placeholder = 'placeholder="' . __( 'example: //cdn.yoursite.com/', 'autoptimize' ) . ' "';
-    $cdn_description = __( 'Enter your CDN root URL to enable CDN for Autoptimized files. The URL can be http, https or protocol-relative. This is not needed for Cloudflare.', 'autoptimize' );    
+    $cdn_description = __( 'Enter your CDN root URL to enable CDN for Autoptimized files. The URL can be http, https or protocol-relative. This is not needed for Cloudflare.', 'autoptimize' );
 }
 ?>
 <td><label><input id="cdn_url" type="text" name="autoptimize_cdn_url" pattern="^(https?:)?\/\/([\da-z\.-]+)\.([\da-z\.]{2,6})([\/\w \.-]*)*(:\d{2,5})?\/?$" style="width:100%" <?php echo $cdn_placeholder . $cdn_editable; ?> value="<?php echo esc_url( autoptimizeOptionWrapper::get_option( 'autoptimize_cdn_url', '' ), array( 'http', 'https' ) ); ?>" /><br />
@@ -433,7 +438,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
 <li class="itemDetail">
 <h2 class="itemTitle"><?php _e( 'Misc Options', 'autoptimize' ); ?></h2>
 <table class="form-table">
-    <tr valign="top" >
+    <tr valign="top">
     <th scope="row"><?php _e( 'Save aggregated script/css as static files?', 'autoptimize' ); ?></th>
     <td><label class="cb_label"><input type="checkbox" name="autoptimize_cache_nogzip" <?php echo $conf->get( 'autoptimize_cache_nogzip') ? 'checked="checked" ' : ''; ?>/>
     <?php _e( 'By default files saved are static css/js, uncheck this option if your webserver doesn\'t properly handle the compression and expiry.', 'autoptimize' ); ?></label></td>
@@ -476,6 +481,13 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
     <th scope="row"><?php _e( 'Enable configuration per post/ page?', 'autoptimize' ); ?></th>
     <td><label class="cb_label"><input type="checkbox" name="autoptimize_enable_meta_ao_settings" <?php echo $conf->get( 'autoptimize_enable_meta_ao_settings' ) ? 'checked="checked" ' : ''; ?>/>
     <?php _e( 'Add a "metabox" to the post/ page edit screen allowing different optimizations to be turned off on a per post/ page level?', 'autoptimize' ); ?></label></td>
+    </tr>
+    <?php } ?>
+    <?php if ( false !== (bool) autoptimizeOptionWrapper::get_option( 'autoptimize_installed_before_compatibility', false ) ) { ?>
+    <tr valign="top">
+    <th scope="row"><?php _e( 'Disable extra compatibilty logic?', 'autoptimize' ); ?></th>
+    <td><label class="cb_label"><input type="checkbox" name="autoptimize_installed_before_compatibility" checked="checked" />
+    <?php _e( 'In Autoptimize 3.0 extra compatibiity logic was added (e.g. for Gutenberg blocks, Revolution Slider, jQuery-heavy plugins, ...), but if you had Autoptimize installed already before the update to 3.0, this compatibility code was disabled. <strong>Untick this option to permanently enable the compatibility logic</strong>.', 'autoptimize' ); ?></label></td>
     </tr>
     <?php } ?>
 </table>
@@ -568,7 +580,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
                 check_exclusions( "js", "off" );
             }
         });
-        
+
         jQuery( "#autoptimize_js_defer_not_aggregate" ).change(function() {
             if (this.checked && jQuery("#autoptimize_js").prop('checked')) {
                 jQuery( "#autoptimize_js_aggregate" ).prop( 'checked', false ); // uncheck "aggregate JS"
@@ -670,7 +682,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
             jQuery(".js_sub:visible").fadeTo('fast',.33);
         }
     }
-    
+
     function check_exclusions( what, state ) {
         exclusion_node = 'input[name="autoptimize_' + what + '_exclude"]';
         current_exclusion = jQuery( exclusion_node ).val();
@@ -680,9 +692,9 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
         } else if ( what == "css")  {
             default_exclusion = ", admin-bar.min.css, dashicons.min.css, wp-content/cache/, wp-content/uploads/";
         }
-        
+
         default_in_current = current_exclusion.indexOf(default_exclusion);
-        
+
         if ( state == "on" && default_in_current == -1 ) {
             jQuery( exclusion_node ).val( current_exclusion + default_exclusion );
         } else if ( state = "off" && current_exclusion == default_exclusion ) {
@@ -730,6 +742,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
     public function registersettings() {
         register_setting( 'autoptimize', 'autoptimize_html' );
         register_setting( 'autoptimize', 'autoptimize_html_keepcomments' );
+        register_setting( 'autoptimize', 'autoptimize_html_minify_inline' );
         register_setting( 'autoptimize', 'autoptimize_enable_site_config' );
         register_setting( 'autoptimize', 'autoptimize_js' );
         register_setting( 'autoptimize', 'autoptimize_js_aggregate' );
@@ -757,6 +770,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
         register_setting( 'autoptimize', 'autoptimize_minify_excluded' );
         register_setting( 'autoptimize', 'autoptimize_cache_fallback' );
         register_setting( 'autoptimize', 'autoptimize_enable_meta_ao_settings' );
+        register_setting( 'autoptimize', 'autoptimize_installed_before_compatibility' );
     }
 
     public function setmeta( $links, $file = null )
@@ -792,34 +806,36 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
     public static function get_defaults()
     {
         static $config = array(
-            'autoptimize_html'                      => 0,
-            'autoptimize_html_keepcomments'         => 0,
-            'autoptimize_enable_site_config'        => 1,
-            'autoptimize_js'                        => 0,
-            'autoptimize_js_aggregate'              => 0,
-            'autoptimize_js_defer_not_aggregate'    => 1,
-            'autoptimize_js_defer_inline'           => 1,
-            'autoptimize_js_exclude'                => '', // 'wp-includes/js/dist/, wp-includes/js/tinymce/, js/jquery/jquery.min.js',
-            'autoptimize_js_trycatch'               => 0,
-            'autoptimize_js_justhead'               => 0,
-            'autoptimize_js_include_inline'         => 0,
-            'autoptimize_js_forcehead'              => 0,
-            'autoptimize_css'                       => 0,
-            'autoptimize_css_aggregate'             => 0,
-            'autoptimize_css_exclude'               => '', // admin-bar.min.css, dashicons.min.css, wp-content/cache/, wp-content/uploads/',
-            'autoptimize_css_justhead'              => 0,
-            'autoptimize_css_include_inline'        => 0,
-            'autoptimize_css_defer'                 => 0,
-            'autoptimize_css_defer_inline'          => '',
-            'autoptimize_css_inline'                => 0,
-            'autoptimize_css_datauris'              => 0,
-            'autoptimize_cdn_url'                   => '',
-            'autoptimize_cache_nogzip'              => 1,
-            'autoptimize_optimize_logged'           => 1,
-            'autoptimize_optimize_checkout'         => 0,
-            'autoptimize_minify_excluded'           => 1,
-            'autoptimize_cache_fallback'            => 1,
-            'autoptimize_enable_meta_ao_settings'   => 1,
+            'autoptimize_html'                           => 0,
+            'autoptimize_html_keepcomments'              => 0,
+            'autoptimize_html_minify_inline'             => 0,
+            'autoptimize_enable_site_config'             => 1,
+            'autoptimize_js'                             => 0,
+            'autoptimize_js_aggregate'                   => 0,
+            'autoptimize_js_defer_not_aggregate'         => 1,
+            'autoptimize_js_defer_inline'                => 1,
+            'autoptimize_js_exclude'                     => '', // 'wp-includes/js/dist/, wp-includes/js/tinymce/, js/jquery/jquery.min.js',
+            'autoptimize_js_trycatch'                    => 0,
+            'autoptimize_js_justhead'                    => 0,
+            'autoptimize_js_include_inline'              => 0,
+            'autoptimize_js_forcehead'                   => 0,
+            'autoptimize_css'                            => 0,
+            'autoptimize_css_aggregate'                  => 0,
+            'autoptimize_css_exclude'                    => '', // admin-bar.min.css, dashicons.min.css, wp-content/cache/, wp-content/uploads/',
+            'autoptimize_css_justhead'                   => 0,
+            'autoptimize_css_include_inline'             => 0,
+            'autoptimize_css_defer'                      => 0,
+            'autoptimize_css_defer_inline'               => '',
+            'autoptimize_css_inline'                     => 0,
+            'autoptimize_css_datauris'                   => 0,
+            'autoptimize_cdn_url'                        => '',
+            'autoptimize_cache_nogzip'                   => 1,
+            'autoptimize_optimize_logged'                => 1,
+            'autoptimize_optimize_checkout'              => 0,
+            'autoptimize_minify_excluded'                => 1,
+            'autoptimize_cache_fallback'                 => 1,
+            'autoptimize_enable_meta_ao_settings'        => 1,
+            'autoptimize_installed_before_compatibility' => 0,
         );
 
         return $config;
@@ -1033,7 +1049,7 @@ if ( true === autoptimizeImages::imgopt_active() && true === apply_filters( 'aut
             return true;
         } else if ( array_key_exists( 'ao_post_optimize', $_meta_value ) && 'on' !== $_meta_value['ao_post_optimize'] ) {
             // ao entirely off for this page.
-            return false; 
+            return false;
         } else if ( array_key_exists( $optim, $_meta_value ) && empty( $_meta_value[$optim] ) ) {
             // sub-optimization off for this page.
             return false;

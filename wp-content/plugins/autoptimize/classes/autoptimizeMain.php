@@ -394,6 +394,12 @@ class autoptimizeMain
             // 2 generic parameters that could/ should become standard between optimization plugins?)
             if ( false === $ao_noptimize ) {
                 $_qs_showstoppers = array( 'no_cache', 'no_optimize', 'tve', 'elementor-preview', 'fl_builder', 'vc_action', 'et_fb', 'bt-beaverbuildertheme', 'ct_builder', 'fb-edit', 'siteorigin_panels_live_editor', 'preview' );
+
+                // doing Jonathan a quick favor to allow correct unused CSS generation ;-)
+                if ( apply_filters( 'autoptimize_filter_main_showstoppers_do_wp_rocket_a_favor', true ) ) {
+                    $_qs_showstoppers[] = 'nowprocket';
+                }
+
                 foreach ( $_qs_showstoppers as $_showstopper ) {
                     if ( array_key_exists( $_showstopper, $_GET ) ) {
                         $ao_noptimize = true;
@@ -558,7 +564,8 @@ class autoptimizeMain
                 'minify_excluded' => $conf->get( 'autoptimize_minify_excluded' ),
             ),
             'autoptimizeHTML'    => array(
-                'keepcomments' => $conf->get( 'autoptimize_html_keepcomments' ),
+                'keepcomments'  => $conf->get( 'autoptimize_html_keepcomments' ),
+                'minify_inline' => $conf->get( 'autoptimize_html_minify_inline' ),
             ),
         );
 
@@ -618,6 +625,7 @@ class autoptimizeMain
             'autoptimize_css_exclude',
             'autoptimize_html',
             'autoptimize_html_keepcomments',
+            'autoptimize_html_minify_inline',
             'autoptimize_enable_site_config',
             'autoptimize_enable_meta_ao_settings',
             'autoptimize_js',

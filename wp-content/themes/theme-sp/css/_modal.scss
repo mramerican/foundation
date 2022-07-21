@@ -145,6 +145,12 @@
       }
     }
 
+    &.en {
+      .popup__content {
+        max-width: 435px;
+      }
+    }
+
     background: url("../img/popupHelpUkraineChildren/bg_big.png") no-repeat top right;
     max-width: 1140px;
 
