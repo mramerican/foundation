@@ -16,12 +16,6 @@ use WebpConverter\Service\OptionsAccessManager;
 <table>
 	<tbody>
 	<tr>
-		<td class="e"><?php echo esc_html( CloudwaysNotice::NOTICE_OPTION ); ?></td>
-		<td class="v">
-			<?php echo esc_html( OptionsAccessManager::get_option( CloudwaysNotice::NOTICE_OPTION ) ?: '-' ); ?>
-		</td>
-	</tr>
-	<tr>
 		<td class="e"><?php echo esc_html( CloudflareNotice::NOTICE_OPTION ); ?></td>
 		<td class="v">
 			<?php echo esc_html( OptionsAccessManager::get_option( CloudflareNotice::NOTICE_OPTION ) ?: '-' ); ?>

@@ -19,28 +19,24 @@ function upgrade(){
 
 	update_option( $ver_key, $cur_ver );
 
-	$ktumb = \Kama_Thumbnail::init();
+	\Kama_Thumbnail::init();
 
-	cache_dir_rename();
+	v339_cache_dir_rename();
 }
 
 // v 3.3.9
-function cache_dir_rename(){
+function v339_cache_dir_rename(){
 
-	// upgrade
-	$opt_name = \Kama_Thumbnail::$opt_name;
-	$opts = is_multisite() ? get_site_option( $opt_name ) : get_option( $opt_name );
+	$opts = kthumb_opt()->get_options_raw();
 
 	if( ! isset( $opts['cache_dir_url'] ) ){
 
 		$opts['cache_dir'] = @ $opts['cache_folder'] ?: '';
 		$opts['cache_dir_url'] = @ $opts['cache_folder_url'] ?: '';
 
-		unset( $opts['cache_folder_url'], $opts['cache_folder'] );
+		unset( $opts['cache_folder'], $opts['cache_folder_url'] );
 
-		is_multisite()
-			? update_site_option( $opt_name, $opts )
-			: update_option( $opt_name, $opts );
+		kthumb_opt()->update_options( $opts );
 	}
 
 }

@@ -1,32 +1,43 @@
 <?php
 
+/**
+ * Use following code instead of same-named functions where you want to show thumbnail:
+ *
+ *     echo apply_filters( 'kama_thumb_src',   '', $args, $src );
+ *     echo apply_filters( 'kama_thumb_img',   '', $args, $src );
+ *     echo apply_filters( 'kama_thumb_a_img', '', $args, $src );
+ */
+add_filter( 'kama_thumb_src',   'kama_thumb_hook_cb', 0, 3 );
+add_filter( 'kama_thumb_img',   'kama_thumb_hook_cb', 0, 3 );
+add_filter( 'kama_thumb_a_img', 'kama_thumb_hook_cb', 0, 3 );
 
-function kama_thumb_hook_cb( $empty, $args = [], $src = 'notset' ){
+function kama_thumb_hook_cb( $foo, $args = [], $src = 'notset' ){
 
-	$cur_hook = current_filter(); // hook
+	$cur_hook = current_filter(); // hook name
 
-	// suport for versions below 3.4.0 in which hooks was renamed
+	// support for versions earlier than 3.4.0, in which the hooks have been renamed
 	foreach( $GLOBALS['wp_filter'][ $cur_hook ]->callbacks as $priority => $callbacks ){
 
 		foreach( $callbacks as $cb ){
 
 			// skip current hook
-			if( __FUNCTION__ === $cb['function'] )
+			if( __FUNCTION__ === $cb['function'] ){
 				continue;
+			}
 
 			// re-create hooks:
-			// `kama_thumb_src` → `kama_thumb__src`
-			// `kama_thumb_img` → `kama_thumb__img`
+			// `kama_thumb_src`   → `kama_thumb__src`
+			// `kama_thumb_img`   → `kama_thumb__img`
 			// `kama_thumb_a_img` → `kama_thumb__a_img`
 			remove_filter( $cur_hook, $cb['function'], $priority );
-			$new_hook = str_replace( 'kama_thumb_', 'kama_thumb__', $cur_hook );
-			add_filter( $new_hook, $cb['function'], $priority, $cb['accepted_args'] );
+			$new_hook_name = str_replace( 'kama_thumb_', 'kama_thumb__', $cur_hook );
+			add_filter( $new_hook_name, $cb['function'], $priority, $cb['accepted_args'] );
 
 			if( WP_DEBUG ){
 				trigger_error(
 					sprintf(
 						'Kama Thumbnail hook `%s` was renamed to `%s` in version %s. Fix code of your theme or plugin, please.',
-						$cur_hook, $new_hook, '3.4.0'
+						$cur_hook, $new_hook_name, '3.4.0'
 					),
 					E_USER_NOTICE
 				);
@@ -34,6 +45,7 @@ function kama_thumb_hook_cb( $empty, $args = [], $src = 'notset' ){
 		}
 	}
 
+	// call function
 	return $cur_hook( $args, $src );
 }
 
@@ -84,15 +96,32 @@ function kama_thumb_a_img( $args = [], $src = 'notset' ){
  * @return mixed|Kama_Make_Thumb|null The value of specified property or
  *                                    `Kama_Make_Thumb` object if no property is specified.
  */
-function kama_thumb( $optname = '' ){
+function kama_thumb( $optname = '' ) {
 
 	$instance = Kama_Make_Thumb::$last_instance;
 
-	if( ! $optname )
+	if( ! $optname ){
 		return $instance;
+	}
 
-	if( property_exists( $instance, $optname ) )
+	if( property_exists( $instance, $optname ) ){
 		return $instance->$optname;
+	}
 
 	return null;
 }
+
+/**
+ * @return Kama_Thumbnail_Options
+ */
+function kthumb_opt(){
+	return Kama_Thumbnail::$opt;
+}
+
+/**
+ * @return Kama_Thumbnail_Cache
+ */
+function kthumb_cache(){
+	return Kama_Thumbnail::$cache;
+}
+

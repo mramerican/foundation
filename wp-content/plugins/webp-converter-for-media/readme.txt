@@ -1,6 +1,6 @@
 === Converter for Media - Convert WebP and AVIF & Optimize Images | Ease image optimization ===
 Contributors: mateuszgbiorczyk
-Donate link: https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=readme-donate
+Donate link: https://mattplugins.com/products/webp-converter-for-media-pro/?utm_source=webp-converter-for-media&utm_campaign=upgrade-to-pro&utm_medium=readme-donate
 Tags: convert webp, webp, optimize images, image optimization, compress images
 Requires at least: 4.9
 Tested up to: 6.0
@@ -329,6 +329,10 @@ In case of problems, please contact us in [the support forum](https://wordpress.
 2. Screenshot when regenerating images
 
 == Changelog ==
+
+= 4.5.1 (2022-07-22) =
+* `[Removed]` Notification asking to clear cache for Cloudways
+* `[Changed]` Error message for bypassing_apache error in server configuration
 
 = 4.5.0 (2022-07-15) =
 * `[Changed]` Plugin name from "WebP Converter to Media" to "Converter for Media"

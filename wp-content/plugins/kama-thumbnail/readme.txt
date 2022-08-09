@@ -1,8 +1,10 @@
 === Plugin Name ===
-Stable tag: trunk
-Tested up to: 6.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag:   trunk
+Tested up to: 6.1
+
+License:      GPLv2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+
 Contributors: Tkama
 Tags: thumbnail, image
 
@@ -317,9 +319,19 @@ If you are themes developer, and need all it functionality, but you need to inst
 
 == Changelog ==
 
+= 3.4.1 =
+- BUG: Uninstall.php bugfix.
+
+= 3.4.0 =
+- NEW: hook: 'kama_thumbnail__allowed_hosts'.
+- FIX: Bugfixes from last refactor.
+- IMP: Code improvements.
+- IMP: Huge refactor.
+
 = 3.3.8 =
 - NEW: hook `kama_thumb__replece_in_content_args`.
 - NEW: `wh` parameter - set width & height params at once. Example: `kama_thumb_img( 'wh=200:300' )`.
+- FIX: PHP 8.0 support.
 - Refactor.
 
 = 3.3.7 =

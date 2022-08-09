@@ -66,7 +66,7 @@ class Kama_Make_Thumb {
 	public $thumb_url;
 
 	/**
-	 * Various data for debag.
+	 * Various data for debug.
 	 *
 	 * @var array
 	 */
@@ -80,18 +80,11 @@ class Kama_Make_Thumb {
 	public $force_format;
 
 	/**
-	 * The plugin options.
-	 *
-	 * @var object
-	 */
-	public $opt;
-
-	/**
 	 * Last instance to have access to the information like $width, $height etc.
 	 *
 	 * @var Kama_Make_Thumb
 	 */
-	static $last_instance;
+	public static $last_instance;
 
 	/**
 	 * Thumbs created per php request.
@@ -107,11 +100,12 @@ class Kama_Make_Thumb {
 	static $CHMOD_FILE = 0644;
 
 	/**
-	 * Устанавливается в настройках админки.
+	 * It is set in the settings of the admin panel.
+	 * Or in Options class.
 	 *
 	 * @var bool|null
 	 */
-	static $debug;
+	private static $debug;
 
 	/**
 	 * Kama_Make_Thumb constructor.
@@ -126,9 +120,7 @@ class Kama_Make_Thumb {
 		defined( 'FS_CHMOD_DIR' )  && self::$CHMOD_DIR = FS_CHMOD_DIR;
 		defined( 'FS_CHMOD_FILE' ) && self::$CHMOD_FILE = FS_CHMOD_FILE;
 
-		$this->opt = & Kama_Thumbnail::$opt;
-
-		self::$debug = & $this->opt->debug;
+		self::$debug = kthumb_opt()->debug;
 
 		$this->set_args( $args, $src );
 	}
@@ -163,10 +155,10 @@ class Kama_Make_Thumb {
 	 *                                        Default: 'center/center'.
 	 *     @type string         $allow        Allowed hosts for this query (separated by spaces or commas).
 	 *                                        Expands the global option `allow_hosts`.
-	 *     @type int            $quality      The quality of the created thumbnail. Default: $this->opt->quality.
+	 *     @type int            $quality      The quality of the created thumbnail. Default: `quality` option.
 	 *     @type int|WP_Post    $post_id      The ID or object of the post to work with.
 	 *     @type int|WP_Post    $post         $post_id alias.
-	 *     @type bool           $no_stub      Do not show a stub if there is one. Default: $this->opt->no_stub.
+	 *     @type bool           $no_stub      Do not show a stub if there is one. Default: `no_stub` option.
 	 *                                        If you specify `false/0`, the plugin option will be ignored and the stub will be shown!
 	 *     @type bool           $yes_stub     Deprecated from v 3.3.8. Use `no_stub = 0` instead.
 	 *     @type string         $force_format Output image format: jpg, png, gif, webp.
@@ -193,26 +185,26 @@ class Kama_Make_Thumb {
 		$default_args = apply_filters( 'kama_thumb_default_args', [
 
 			'notcrop'      => false,
-			'no_stub'      => ! empty( $this->opt->no_stub ),
+			'no_stub'      => ! empty( kthumb_opt()->no_stub ),
 			'yes_stub'     => false,
 
-			'force_format' => $this->opt->webp ? 'webp' : '',
-			'stub_url'     => $this->opt->no_photo_url,
+			'force_format' => kthumb_opt()->webp ? 'webp' : '',
+			'stub_url'     => kthumb_opt()->no_photo_url,
 			'allow'        => '',
 			'width'        => 0,
 			'height'       => 0,
 			'wh'           => '',
 			'attach_id'    => is_numeric( $src ) ? (int) $src : 0,
 			'src'          => $src,
-			'quality'      => $this->opt->quality,
+			'quality'      => kthumb_opt()->quality,
 			'post_id'      => '',
-			'rise_small'   => $this->opt->rise_small,
+			'rise_small'   => kthumb_opt()->rise_small,
 			'crop'         => true,
 
 			'sizes'        => '', // TODO
 			'srcset'       => '', // TODO
-			'data-src'     => '', // for convenience
-			'data-srcset'  => '', // for convenience
+			'data-src'     => '', // extra
+			'data-srcset'  => '', // extra
 
 			'class'        => 'aligncenter',
 			'style'        => '',
@@ -224,9 +216,9 @@ class Kama_Make_Thumb {
 			'a_class'  => '',
 			'a_style'  => '',
 			'a_attr'   => '',
-			'rel'      => '', // for convenience
-			'target'   => '', // for convenience
-			'download' => '', // for convenience
+			'rel'      => '', // extra
+			'target'   => '', // extra
+			'download' => '', // extra
 
 			'force_lib'    => '',
 		] );
@@ -352,10 +344,11 @@ class Kama_Make_Thumb {
 		}
 
 		// allow_hosts
-		$this->allow_hosts = $this->opt->allow_hosts;
+
+		$this->allow_hosts = kthumb_opt()->allow_hosts;
 		if( $rg['allow'] ){
 			foreach( wp_parse_list( $rg['allow'] ) as $host ){
-				$this->allow_hosts[] = ( $host === 'any' ) ? $host : self::parse_main_dom( $host );
+				$this->allow_hosts[] = ( $host === 'any' ) ? $host : Kama_Thumbnail_Helpers::parse_main_dom( $host );
 			}
 		}
 
@@ -471,10 +464,11 @@ class Kama_Make_Thumb {
 	 */
 	public function a_img(){
 
-		if( ! $img = $this->img() )
+		if( ! $img = $this->img() ){
 			return '';
+		}
 
-		$rg = & $this->args;
+		$rg = &$this->args;
 
 		$attrs = [
 			'href'     => $this->src,
@@ -540,6 +534,12 @@ class Kama_Make_Thumb {
 	 */
 	protected function do_thumbnail(){
 
+		// the request was sent by this plugin, exit to avoid recursion:
+		// is a request for an image that does not exist (404 page).
+		if( isset( $_GET['kthumbloc'] ) ){
+			return null;
+		}
+
 		if( ! $this->src ){
 			$this->src = $this->get_src_from_postmeta();
 		}
@@ -549,27 +549,27 @@ class Kama_Make_Thumb {
 			return false;
 		}
 
-		// if it's placeholder image
+		// if it's stub image
 		if( 'no_photo' === $this->src ){
-			if( $this->no_stub )
+			if( $this->no_stub ){
 				return false;
+			}
 
 			$this->src = $this->stub_url;
 		}
 
-		// fix URL
-		// $this->src = urldecode( $this->src ); // not necessary, it will decode it automatically
+		// fix url
+		// NOTE: $this->src = urldecode( $this->src ); - not necessary, it will decode it automatically
 		$this->src = html_entity_decode( $this->src ); // 'sd&#96;asd.jpg' to 'sd`asd.jpg'
 
-		// запрос отправил этот плагин, выходим, чтобы избежать рекурсии:
-		// это запрос на картинку, которой нет (404 страница).
-		if( isset( $_GET['kthumb'] ) ){
-			return null;
-		}
-
-		// позволяет обработать src и вернуть его прервав дальнейшее выполенение кода.
-		if( $res = apply_filters_ref_array( 'pre_do_thumbnail_src', [ '', & $this ] ) ){
-			return $res;
+		/**
+		 * Allows you to handle src and return it by interrupting further code execution.
+		 *
+		 * @param string          $src
+		 * @param Kama_Make_Thumb $make_thumb
+		 */
+		if( $src = apply_filters( 'pre_do_thumbnail_src', '', $this ) ){
+			return $src;
 		}
 
 		$name_data = $this->_file_name_data();
@@ -579,15 +579,14 @@ class Kama_Make_Thumb {
 			return null;
 		}
 
-		// пропускаем SVG
+		// skip SVG
 		if( ! $name_data->file_name ){
 			return $this->src;
 		}
 
-		$this->thumb_path = $this->opt->cache_dir     ."/$name_data->sub_dir/$name_data->file_name";
-		$this->thumb_url  = $this->opt->cache_dir_url ."/$name_data->sub_dir/$name_data->file_name";
+		$this->thumb_path = kthumb_opt()->cache_dir     ."/$name_data->sub_dir/$name_data->file_name";
+		$this->thumb_url  = kthumb_opt()->cache_dir_url ."/$name_data->sub_dir/$name_data->file_name";
 
-		// maybe cache
 		$thumb_url = $this->get_thumb_cache();
 
 		if( false === $thumb_url ){
@@ -648,7 +647,7 @@ class Kama_Make_Thumb {
 	protected function create_thumb(){
 
 		// STOP if execution time exceed
-		if( microtime( true ) - $GLOBALS['timestart'] > $this->opt->stop_creation_sec ){
+		if( microtime( true ) - $GLOBALS['timestart'] > kthumb_opt()->stop_creation_sec ){
 			static $stop_error_shown;
 
 			if( ! $stop_error_shown && $stop_error_shown = 1 ){
@@ -663,10 +662,10 @@ class Kama_Make_Thumb {
 
 		if( ! $this->_check_create_folder() ){
 
-			Kama_Thumbnail::show_message(
+			Kama_Thumbnail_Helpers::show_message(
 				sprintf(
 					__( 'Folder where thumbs will be created not exists. Create it manually: "s%"', 'kama-thumbnail' ),
-					$this->opt->cache_dir
+					kthumb_opt()->cache_dir
 				),
 				'error'
 			);
@@ -695,9 +694,9 @@ class Kama_Make_Thumb {
 		}
 		else {
 			$this->metadata += [
-				'mime'   => $size['mime'],
-				'width'  => $size[0],
-				'weight' => $size[1],
+				'mime'        => $size['mime'],
+				'orig_width'  => $size[0],
+				'orig_height' => $size[1],
 			];
 		}
 
@@ -714,8 +713,8 @@ class Kama_Make_Thumb {
 
 		// Create thumb
 		$use_lib = strtolower( $this->args['force_lib'] );
-		if( ! $use_lib ) $use_lib = extension_loaded('imagick') ? 'imagick' : '';
-		if( ! $use_lib ) $use_lib = extension_loaded('gd')      ? 'gd'      : '';
+		$use_lib || ( $use_lib = extension_loaded('imagick') ? 'imagick' : '' );
+		$use_lib || ( $use_lib = extension_loaded('gd')      ? 'gd'      : '' );
 		$this->metadata['lib'] = $use_lib; // before the call ->make_thumbnail____
 
 		if( 'imagick' === $use_lib ){
@@ -726,7 +725,7 @@ class Kama_Make_Thumb {
 		}
 		// no lib
 		else {
-			trigger_error( 'ERROR: There is no one of the Image libraries (GD or Imagick) installed on your server.' );
+			trigger_error( 'ERROR: Kama_ There is no one of the Image libraries (GD or Imagick) installed on your server.' );
 			$done = false;
 		}
 
@@ -738,13 +737,14 @@ class Kama_Make_Thumb {
 			$this->thumb_url = '';
 		}
 
-		// allow process created thumbnail, for example, to compress it
+		// allow process created thumbnail, for example, to compress it.
 		do_action( 'kama_thumb_created', $this->thumb_path, $this );
 
 		self::$_thumbs_created++;
 
-		if( $this->no_stub && ! empty( $this->metadata['stub'] ) )
+		if( $this->no_stub && ! empty( $this->metadata['stub'] ) ){
 			return false;
+		}
 
 		return $this->thumb_url;
 	}
@@ -857,7 +857,7 @@ class Kama_Make_Thumb {
 
 		// Create a resource
 		$image = @ imagecreatefromstring( $img_string );
-		$isok = PHP_VERSION_ID >= 80000 ? ( $image instanceof GDImage ) : is_resource( $image );
+		$isok = ( PHP_VERSION_ID >= 80000 ) ? ( $image instanceof GDImage ) : is_resource( $image );
 		if( ! $isok ){
 			return false;
 		}
@@ -941,7 +941,7 @@ class Kama_Make_Thumb {
 	/**
 	 * Gets the image as a string of data by the specified URL of the image.
 	 *
-	 * @return string Image data or a empty string.
+	 * @return string Image data or an empty string.
 	 */
 	protected function get_img_string(){
 
@@ -951,8 +951,8 @@ class Kama_Make_Thumb {
 		// Let's add a marker to the internal URL to avoid recursion when there is no image
 		// and we get to the 404 page, where the same thumbnail is created again.
 		// add_query_arg() cannot be used
-		if( false !== strpos( $this->src, Kama_Thumbnail::$main_host ) ){
-			$img_url .= ( strpos( $this->src, '?' ) ? '&' : '?' ) . 'kthumb';
+		if( false !== strpos( $this->src, Kama_Thumbnail_Options::$main_host ) ){
+			$img_url .= ( strpos( $this->src, '?' ) ? '&' : '?' ) . 'kthumbloc';
 		}
 
 		if( false === strpos( $img_url, 'http' ) && '//' !== substr( $img_url, 0, 2 ) ){
@@ -960,21 +960,21 @@ class Kama_Make_Thumb {
 		}
 
 		// ABSPATH
-		if( ! $img_str && strpos( $img_url, $_SERVER['HTTP_HOST'] ) ){
+		if( strpos( $img_url, $_SERVER['HTTP_HOST'] ) ){
 
 			$this->metadata['request_type'] = 'ABSPATH';
 
 			// site root. $_SERVER['DOCUMENT_ROOT'] could be wrong
-			$root = ABSPATH;
+			$root_path = ABSPATH;
 
 			// maybe WP in sub dir?
 			$root_parent = dirname( ABSPATH ) . '/';
-			if( @ file_exists( $root_parent . 'wp-config.php') && ! file_exists( $root_parent . 'wp-settings.php' ) ){
-				$root = $root_parent;
+			if( @ file_exists( $root_parent . 'wp-config.php' ) && ! file_exists( $root_parent . 'wp-settings.php' ) ){
+				$root_path = $root_parent;
 			}
 
 			// skip query args
-			$img_path = preg_replace( '~^https?://[^/]+/(.*?)([?].+)?$~', "$root\\1", $img_url );
+			$img_path = preg_replace( '~^https?://[^/]+/(.*?)([?].+)?$~', "$root_path\\1", $img_url );
 
 			if( file_exists( $img_path ) ){
 				$img_str = self::$debug ? file_get_contents( $img_path ) : @ file_get_contents( $img_path );
@@ -982,7 +982,7 @@ class Kama_Make_Thumb {
 		}
 
 		/**
-		 * Allow to disable http requests
+		 * Allows to disable http requests.
 		 *
 		 * @param bool $disable
 		 */
@@ -1047,15 +1047,11 @@ class Kama_Make_Thumb {
 			}
 		}
 
-		// If the URL returned HTML code (for example page 404) check only the first
-		// 400 characters, because '<!DOCTYPE' can be in the metadata of the image
-		if(
-			( $img_str_head = trim( substr( $img_str, 0, 400 ) ) )
-			&&
-			preg_match( '~<!DOCTYPE|<html~', $img_str_head )
-		){
+		// If the URL returned HTML code (for example page 404). Check the first
+		// 400 characters only, because '<!DOCTYPE' can be in the metadata of the image
+		$img_str_head = trim( substr( $img_str, 0, 400 ) );
+		if( $img_str_head && preg_match( '~<!DOCTYPE|<html~', $img_str_head ) ){
 			$this->metadata['img_str_error'] = 'HTML in img_str';
-
 			$img_str = '';
 		}
 
@@ -1095,7 +1091,7 @@ class Kama_Make_Thumb {
 		if( preg_match( '~\.([a-z0-9]{2,4})$~i', $srcpath, $mm ) ){
 			$data->ext = strtolower( $mm[1] );
 		}
-		elseif( preg_match( '~\.(jpe?g|png|gif|svg|bmp)~i', $srcpath, $mm ) ){
+		elseif( preg_match( '~\.(jpe?g|png|gif|webp|avif|bmp|svg)~i', $srcpath, $mm ) ){
 			$data->ext = strtolower( $mm[1] );
 		}
 		else{
@@ -1254,227 +1250,6 @@ class Kama_Make_Thumb {
 
 }
 
-trait Kama_Make_Thumb__Helpers {
-
-	/**
-	 * Get main domain name from URL or Subdomain:
-	 * foo.site.com > site.com | sub.site.co.uk > site.co.uk | sub.site.com.ua > site.com.ua
-	 *
-	 * @param string  $host  URL or Host like: site.ru, site1.site.ru, xn--n1ade.xn--p1ai
-	 *
-	 * @return string Main domain name.
-	 */
-	public static function parse_main_dom( $host ){
-
-		// URL passed || port is specified (dom.site.ru:8080 > dom.site.ru) (59.120.54.215:8080 > 59.120.54.215)
-		if( preg_match( '~/|:\d{2}~', $host ) )
-			$host = parse_url( $host, PHP_URL_HOST );
-
-		// for http://localhost/foo  or  IP
-		if( ! strpos( $host, '.' ) || filter_var( $host, FILTER_VALIDATE_IP ) )
-			return $host;
-
-		$host = preg_replace( '/^www\./', '', $host );
-
-		// cirilic: .сайт, .онлайн, .дети, .ком, .орг, .рус, .укр, .москва, .испытание, .бг
-		if( false !== strpos( $host, 'xn--' ) )
-			preg_match( '/xn--[^.]+\.xn--[^.]+$/', $host, $mm );
-		// other: foo.academy, regery.com.ua, site.ru, foo.bar.photography, bar.tema.agr.co, ps.w.org
-		else
-			preg_match( '/[a-z0-9][a-z0-9\-]{1,63}\.(?:[a-z]{2,11}|[a-z]{1,3}\.[a-z]{2,3})$/i', $host, $mm );
-
-		return apply_filters( 'kama_thumb__parse_main_dom', $mm[0], $host );
-	}
-
-	/**
-	 * Получает ссылку на картинку из произвольного поля текущего поста
-	 * или ищет ссылку в контенте поста и создает произвольное поле.
-	 *
-	 * Если в тексте картинка не нашлась, то в произвольное поле запишется заглушка `no_photo`.
-	 *
-	 * @return string
-	 */
-	public function get_src_from_postmeta() {
-		global $post, $wpdb;
-
-		$post_id = $this->post_id;
-
-		if( ! $post_id ){
-			$post_id = isset( $post->ID ) ? $post->ID : 0;
-		}
-
-		if( ! $post_id ){
-			return '';
-		}
-
-		$src = get_post_meta( $post_id, $this->opt->meta_key, true );
-
-		if( $src ){
-			return $src;
-		}
-
-		// maybe standard thumbnail
-		if( $_thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true ) ){
-			$src = wp_get_attachment_url( (int) $_thumbnail_id );
-		}
-
-		// получаем ссылку из контента
-		if( ! $src ){
-			$post_content = $this->post_id
-				? $wpdb->get_var( "SELECT post_content FROM $wpdb->posts WHERE ID = " . (int) $this->post_id . " LIMIT 1" )
-				: $post->post_content;
-
-			$src = $this->_get_src_from_text( $post_content );
-		}
-
-		// получаем ссылку из вложений - первая картинка
-		if( ! $src ){
-			$attch_img = get_children( [
-				'numberposts'    => 1,
-				'post_mime_type' => 'image',
-				'post_parent'    => $post_id,
-				'post_type'      => 'attachment'
-			] );
-
-			if( $attch_img = array_shift( $attch_img ) )
-				$src = wp_get_attachment_url( $attch_img->ID );
-		}
-
-		// The `no_photo` stub, to not have to check all the time
-		if( ! $src )
-			$src = 'no_photo';
-
-		update_post_meta( $post_id, $this->opt->meta_key, wp_slash($src) );
-
-		return $src;
-	}
-
-	/**
-	 * Looks for a URL to an image in the text and returns it.
-	 *
-	 * @param string $text
-	 *
-	 * @return mixed|string|void
-	 */
-	protected function _get_src_from_text( $text ){
-
-		$allowed_hosts_patt = '';
-
-		if( ! in_array( 'any', $this->allow_hosts, 1 ) ){
-			$hosts_regex = implode( '|', array_map( 'preg_quote', $this->allow_hosts ) );
-			$allowed_hosts_patt = '(?:www\.)?(?:'. $hosts_regex .')';
-		}
-
-		$hosts_patt = '(?:https?://'. $allowed_hosts_patt .'|/)';
-
-		if(
-			( false !== strpos( $text, 'src=') ) &&
-			preg_match('~(?:<a[^>]+href=[\'"]([^>]+)[\'"][^>]*>)?<img[^>]+src=[\'"]\s*('. $hosts_patt .'.*?)[\'"]~i', $text, $match )
-		){
-			// Check the URL of the link
-			$src = $match[1];
-			if( ! preg_match('~\.(jpe?g|png|gif|bmp)(?:\?.+)?$~i', $src) || ! $this->_is_allowed_host($src) ){
-				// Check the URL of the image, if the URL of the link does not fit
-				$src = $match[2];
-				if( ! $this->_is_allowed_host( $src ) )
-					$src = '';
-			}
-
-			return $src;
-		}
-
-		return apply_filters( 'kama_thumb__get_src_from_text', '', $text );
-	}
-
-	/**
-	 * Checks that the image is from an allowed host.
-	 *
-	 * @param string $src
-	 *
-	 * @return bool|mixed|void
-	 */
-	protected function _is_allowed_host( $src ){
-
-		/**
-		 * Allow to make the URL allowed for creating thumb.
-		 *
-		 * @param bool   $allowed  Whether the url allowed. If `false` fallback to default check.
-		 * @param string $src      Image URL to create thumb from.
-		 * @param object $opt      Kama thumbnail options.
-		 */
-		if( $allowed = apply_filters( 'kama_thumb__is_allowed_host', false, $src, $this->opt ) )
-			return $allowed;
-
-		if(
-			( '/' === $src[0] && '/' !== $src[1] ) || // relative url
-			in_array( 'any', $this->allow_hosts, 1 )
-		)
-			return true;
-
-		$host = self::parse_main_dom( $src );
-		if( $host && in_array( $host, $this->allow_hosts, 1 ) )
-			return true;
-
-		return false;
-	}
-
-	/**
-	 * Corrects the specified URL: adds protocol, domain (for relative links), etc.
-	 *
-	 * @param string $src
-	 *
-	 * @return string
-	 */
-	protected static function _fix_src_protocol_domain( $src ){
-
-		// URL without protocol: //site.ru/foo
-		if( 0 === strpos( $src, '//' ) ){
-			$src = ( is_ssl() ? 'https' : 'http' ) . ":$src";
-		}
-		// relative URL
-		elseif( '/' === $src[0] ){
-			$src = home_url( $src );
-		}
-
-		return $src;
-	}
-
-	/**
-	 * Changes the passed thumbnail path/URL, making it the stub path.
-	 *
-	 * @param string $path_url Path/URL to the thumbnail file.
-	 * @param string $type     What was passed path or url?
-	 *
-	 * @return string New Path/URL.
-	 */
-	protected function _change_to_stub( $path_url, $type ){
-
-		$bname = basename( $path_url );
-
-		$base = ( 'url' === $type )
-			? $this->opt->cache_dir_url
-			: $this->opt->cache_dir;
-
-		return "$base/stub_$bname";
-	}
-
-	/**
-	 * Checks if the specified directory exists, tries to create it if it does not.
-	 *
-	 * @return bool
-	 */
-	protected function _check_create_folder(){
-
-		$path = dirname( $this->thumb_path );
-
-		if( is_dir( $path ) ){
-			return true;
-		}
-
-		return mkdir( $path, self::$CHMOD_DIR, true );
-	}
-
-}
 
 
 

@@ -48,7 +48,7 @@ class Kama_Thumbnail_CLI_Command extends WP_CLI_Command {
 			isset( $params['thumbs'] ) && $type = 'rm_thumbs';
 			isset( $params['meta'] )   && $type = 'rm_post_meta';
 
-			Kama_Thumbnail::init()->force_clear( $type );
+			kthumb_cache()->force_clear( $type );
 		}
 
 	}

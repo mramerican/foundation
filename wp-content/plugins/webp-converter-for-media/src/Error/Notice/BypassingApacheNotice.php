@@ -21,7 +21,12 @@ class BypassingApacheNotice implements ErrorNotice {
 	 */
 	public function get_message(): array {
 		return [
-			__( 'Requests to images are processed by Nginx server bypassing Apache. Please log in to your hosting control panel, go to management of this website and try to find one of the following settings:', 'webp-converter-for-media' ),
+			sprintf(
+			/* translators: %1$s: open strong tag, %2$s: close strong tag */
+				__( 'Requests to images are processed by Nginx server bypassing Apache. Please log in to your hosting control panel, go to management of this website and try to find one of the following settings %1$sand disable it if it is active%2$s:', 'webp-converter-for-media' ),
+				'<strong>',
+				'</strong>'
+			),
 			implode(
 				'<br>',
 				[
@@ -47,12 +52,14 @@ class BypassingApacheNotice implements ErrorNotice {
 				]
 			),
 			sprintf(
-			/* translators: %1$s: open strong tag, %2$s: close strong tag */
-				__( '%1$sIf you have any of the above settings active, you must disable them for current website.%2$s Wait a few moments after saving the changes. Optionally, instead of disabling this setting you can remove the following extensions from the list of saved to the cache: .jpg, .jpeg, .png, .gif and .webp.', 'webp-converter-for-media' ),
+			/* translators: %1$s: open strong tag, %2$s: close strong tag, %3$s: break line tag, %4$s: setting name, %5$s: setting name */
+				__( 'In case of problems with finding such settings, %1$splease contact your hosting support and send them the following message%2$s: %3$s"I would like to disable %4$s (or %5$s) for static content files like .jpg, .jpeg, .png, .gif and .webp. These files should have been handled by Apache server instead of Nginx. I need help on this matter."', 'webp-converter-for-media' ),
 				'<strong>',
-				'</strong>'
+				'</strong>',
+				'<br>',
+				'Nginx Caching',
+				'Nginx Direct Delivery'
 			),
-			__( 'In case of problems with finding such settings, please contact your hosting support.', 'webp-converter-for-media' ),
 		];
 	}
 }

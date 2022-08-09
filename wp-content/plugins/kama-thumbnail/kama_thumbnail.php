@@ -14,7 +14,7 @@
  * Requires PHP: 5.6
  * Requires at least: 4.7
  *
- * Version: 3.3.8
+ * Version: 3.4.1
  */
 
 const KTHUMB_MAIN_FILE = __FILE__;
@@ -39,7 +39,7 @@ else {
 
 spl_autoload_register( static function( $name ){
 
-	if( 'Kama_Make_Thumb' === $name || false !== strpos( $name, 'Kama_Thumbnail' ) ){
+	if( false !== strpos( $name, 'Kama_Make_Thumb' ) || false !== strpos( $name, 'Kama_Thumbnail' ) ){
 
 		require KTHUMB_DIR . "/classes/$name.php";
 	}
@@ -47,6 +47,11 @@ spl_autoload_register( static function( $name ){
 
 require KTHUMB_DIR . '/functions.php';
 
+
+// stop if this file loads from uninstall.php file
+if( defined( 'WP_UNINSTALL_PLUGIN' ) ){
+	return;
+}
 
 // init
 
@@ -57,16 +62,6 @@ if( defined( 'WP_CLI' ) ){
 	] );
 }
 
-/**
- * Use following code instead of same-named functions where you want to show thumbnail:
- *
- *     echo apply_filters( 'kama_thumb_src', '', $args, $src );
- *     echo apply_filters( 'kama_thumb_img', '', $args, $src );
- *     echo apply_filters( 'kama_thumb_a_img', '', $args, $src );
- */
-add_filter( 'kama_thumb_src', 'kama_thumb_hook_cb', 0, 3 );
-add_filter( 'kama_thumb_img', 'kama_thumb_hook_cb', 0, 3 );
-add_filter( 'kama_thumb_a_img', 'kama_thumb_hook_cb', 0, 3 );
 
 /**
  * Initialize the plugin later, so that we can use some hooks from the theme.
@@ -85,7 +80,7 @@ function kama_thumbnail_init(){
 	if( defined( 'WP_CLI' ) || is_admin() || wp_doing_ajax() ){
 		require_once __DIR__ .'/upgrade.php';
 
-		Kama_Thumbnail\upgrade();
+		\Kama_Thumbnail\upgrade();
 	}
 }
 
