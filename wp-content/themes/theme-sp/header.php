@@ -63,7 +63,7 @@ $langAttr = $langAttr === 'lang="ru-RU"'? 'lang="ru"':  $langAttr
     'hide_if_empty' => 0,
   ]);
   foreach ($languages as $lang) {
-    $strR = substr($lang['locale'], 0, strpos($lang['locale'], "-"));
+    $strR = strtolower($lang['locale']);
     if (is_category()) {
       $category     = get_queried_object();
       $term_id      = $category->term_id;
